@@ -178,7 +178,7 @@ function goAddress() {
   padding: 0 12px;
   gap: 8px;
 }
-.nav__bar--search { height: 44px; padding-top: 0; margin-top: 8px; }
+.nav__bar--search { height: 44px; padding-top: 0; margin-bottom: 4px; }
 .nav__addr {
   display: flex;
   align-items: center;
