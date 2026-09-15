@@ -56,7 +56,7 @@ const dataUri = computed(() => {
   return 'data:image/svg+xml,' + encodeURIComponent(svg)
 })
 const style = computed(() => {
-  const s = typeof props.size === 'number' ? props.size + 'px' : props.size
+  const s = typeof props.size === 'number' ? props.size * 2 + 'rpx' : props.size
   return `width:${s};height:${s};background-image:url("${dataUri.value}");background-size:contain;background-repeat:no-repeat;background-position:center;`
 })
 </script>

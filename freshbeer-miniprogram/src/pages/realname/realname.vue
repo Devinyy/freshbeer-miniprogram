@@ -65,7 +65,7 @@
       </view>
 
       <view class="tip">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</view>
-      <view style="height: 90px"></view>
+      <view style="height: 180rpx"></view>
     </scroll-view>
 
     <view class="footbar">
@@ -158,49 +158,49 @@ function submit() {
   background: var(--color-bg);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 16px;
+  padding: 24rpx 32rpx;
 }
 .warn {
   background: var(--color-warning-light);
   border-radius: var(--radius-input);
-  padding: 14px;
-  margin-bottom: 12px;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
 }
 .warn__title {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 700;
   color: var(--color-warning);
 }
 .warn__text {
   display: block;
-  font-size: 13px;
+  font-size: 26rpx;
   color: #6b4a00;
   line-height: 1.6;
-  margin-top: 6px;
+  margin-top: 12rpx;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 4px 16px;
+  padding: 8rpx 32rpx;
   box-shadow: var(--shadow-card);
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .steps {
   display: flex;
   align-items: flex-start;
-  padding: 6px 4px 14px;
+  padding: 12rpx 8rpx 28rpx;
 }
 .stepi {
   flex: 1;
@@ -210,15 +210,15 @@ function submit() {
   position: relative;
 }
 .stepi__dot {
-  width: 26px;
-  height: 26px;
+  width: 52rpx;
+  height: 52rpx;
   border-radius: 50%;
   background: var(--color-border);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 26rpx;
   z-index: 2;
 }
 .stepi__dot.doing {
@@ -228,9 +228,9 @@ function submit() {
   background: var(--color-success);
 }
 .stepi__label {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-text-tertiary);
-  margin-top: 6px;
+  margin-top: 12rpx;
 }
 .stepi__label.on {
   color: var(--color-text-primary);
@@ -238,10 +238,10 @@ function submit() {
 }
 .stepi__line {
   position: absolute;
-  top: 13px;
+  top: 26rpx;
   left: 50%;
   right: -50%;
-  height: 2px;
+  height: 4rpx;
   background: var(--color-border);
   z-index: 1;
 }
@@ -249,28 +249,28 @@ function submit() {
   background: var(--color-success);
 }
 .idcard {
-  padding: 16px;
+  padding: 32rpx;
 }
 .idcard__title {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .idcard__row {
   display: flex;
-  gap: 12px;
+  gap: 24rpx;
 }
 .idcard__box {
   flex: 1;
-  height: 96px;
-  border: 1px dashed var(--color-border);
+  height: 192rpx;
+  border: 2rpx dashed var(--color-border);
   border-radius: var(--radius-input);
   background: var(--color-surface-alt);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 12rpx;
 }
 .idcard__box.done {
   border-style: solid;
@@ -278,43 +278,43 @@ function submit() {
   background: var(--color-primary-light);
 }
 .idcard__ico {
-  font-size: 30px;
+  font-size: 60rpx;
   color: var(--color-text-tertiary);
 }
 .idcard__box.done .idcard__ico {
   color: var(--color-primary);
 }
 .idcard__label {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
 }
 .field {
   display: flex;
   align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--color-border-light);
+  padding: 28rpx 0;
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .field:last-child {
   border-bottom: none;
 }
 .field__label {
-  width: 80px;
-  font-size: 14px;
+  width: 160rpx;
+  font-size: 28rpx;
   color: var(--color-text-primary);
 }
 .field__input {
   flex: 1;
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .face {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .face__icon {
-  font-size: 32px;
-  width: 56px;
-  height: 56px;
+  font-size: 64rpx;
+  width: 112rpx;
+  height: 112rpx;
   border-radius: 50%;
   background: var(--color-primary-light);
   display: flex;
@@ -327,34 +327,34 @@ function submit() {
   flex-direction: column;
 }
 .face__title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 600;
 }
 .face__desc {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .tip {
   text-align: center;
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-text-tertiary);
-  padding: 12px 0;
+  padding: 24rpx 0;
 }
 .footbar {
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
+  left: 32rpx;
+  right: 32rpx;
+  bottom: calc(32rpx + env(safe-area-inset-bottom));
   z-index: 20;
 }
 .footbar__btn {
-  height: 48px;
-  line-height: 48px;
+  height: 96rpx;
+  line-height: 96rpx;
   text-align: center;
   background: var(--gradient-primary-btn);
   color: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-primary-glow);

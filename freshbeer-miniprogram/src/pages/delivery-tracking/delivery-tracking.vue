@@ -138,11 +138,11 @@ function goBack() {
   inset: 0;
 }
 .map-fallback { position: absolute; inset: 0; overflow: hidden; background: #e8eee8; }
-.map-fallback__road { position: absolute; height: 10px; background: #fff; box-shadow: 0 0 0 1px #d6dfd6; }
+.map-fallback__road { position: absolute; height: 20rpx; background: #fff; box-shadow: 0 0 0 2rpx #d6dfd6; }
 .map-fallback__road--a { width: 130%; left: -15%; top: 28%; transform: rotate(22deg); }
 .map-fallback__road--b { width: 130%; left: -15%; top: 70%; transform: rotate(-18deg); }
-.map-fallback__route { position: absolute; left: 18%; top: 30%; width: 58%; height: 42%; border: 4px solid var(--color-primary); border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(12deg); opacity: .8; }
-.map-fallback__rider, .map-fallback__home { position: absolute; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fff; box-shadow: var(--shadow-raised); font-size: 24px; }
+.map-fallback__route { position: absolute; left: 18%; top: 30%; width: 58%; height: 42%; border: 8rpx solid var(--color-primary); border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; transform: rotate(12deg); opacity: .8; }
+.map-fallback__rider, .map-fallback__home { position: absolute; width: 84rpx; height: 84rpx; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #fff; box-shadow: var(--shadow-raised); font-size: 48rpx; }
 .map-fallback__rider { left: 24%; top: 35%; }
 .map-fallback__home { right: 20%; bottom: 28%; }
 .topbar {
@@ -151,65 +151,65 @@ function goBack() {
   left: 0;
   right: 0;
   padding-top: env(safe-area-inset-top);
-  height: calc(44px + env(safe-area-inset-top));
+  height: calc(88rpx + env(safe-area-inset-top));
   display: flex;
   align-items: center;
-  padding-left: 12px;
+  padding-left: 24rpx;
   background: linear-gradient(180deg, rgba(255, 248, 240, 0.95), rgba(255, 248, 240, 0));
   z-index: 10;
 }
 .topbar__back {
-  font-size: 28px;
+  font-size: 56rpx;
   color: var(--color-text-primary);
-  width: 32px;
+  width: 64rpx;
 }
 .topbar__title {
   flex: 1;
   text-align: center;
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
-  margin-right: 32px;
+  margin-right: 64rpx;
 }
 .panel {
   position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: calc(20px + env(safe-area-inset-bottom));
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(40rpx + env(safe-area-inset-bottom));
   background: var(--color-surface);
   border-radius: var(--radius-sheet);
-  padding: 20px;
+  padding: 40rpx;
   box-shadow: var(--shadow-floating);
   z-index: 10;
 }
 .panel__eta {
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  gap: 8rpx;
 }
 .panel__eta-num {
-  font-size: 32px;
+  font-size: 64rpx;
   font-weight: 700;
   color: var(--color-primary);
 }
 .panel__eta-unit {
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-primary);
 }
 .panel__eta-tip {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-cold-chain);
-  margin-left: 8px;
+  margin-left: 16rpx;
 }
 .rider {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border-light);
+  gap: 24rpx;
+  margin-top: 32rpx;
+  padding-top: 32rpx;
+  border-top: 2rpx solid var(--color-border-light);
 }
 .rider__ico {
-  font-size: 28px;
+  font-size: 56rpx;
 }
 .rider__body {
   flex: 1;
@@ -217,18 +217,18 @@ function goBack() {
   flex-direction: column;
 }
 .rider__name {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 600;
 }
 .rider__sub {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
 }
 .rider__call {
-  font-size: 22px;
+  font-size: 44rpx;
   background: var(--color-primary-light);
-  width: 40px;
-  height: 40px;
+  width: 80rpx;
+  height: 80rpx;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -237,17 +237,17 @@ function goBack() {
 .panel__addr {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  font-size: 13px;
+  gap: 16rpx;
+  margin-top: 24rpx;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
 }
 .panel__cold {
-  margin-top: 12px;
-  font-size: 12px;
+  margin-top: 24rpx;
+  font-size: 24rpx;
   color: var(--color-cold-chain);
   background: var(--color-cold-chain-bg);
-  padding: 8px 12px;
+  padding: 16rpx 24rpx;
   border-radius: var(--radius-input);
 }
 </style>

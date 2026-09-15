@@ -76,7 +76,7 @@
           @selectSku="onSelectSku"
         />
         <view class="empty" v-if="!sortedResults.length">没有找到相关商品</view>
-        <view style="height: 90px"></view>
+        <view style="height: 180rpx"></view>
       </scroll-view>
     </view>
 
@@ -236,41 +236,41 @@ function goBack() {
   background: var(--color-bg);
 }
 .nav__bar {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 8px;
+  padding: 0 24rpx;
+  gap: 16rpx;
 }
 .nav__back {
-  font-size: 26px;
+  font-size: 52rpx;
   color: var(--color-text-primary);
 }
 .nav__search {
   flex: 1;
-  height: 36px;
+  height: 72rpx;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
+  border: 2rpx solid var(--color-border);
+  border-radius: 36rpx;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 6px;
+  padding: 0 24rpx;
+  gap: 12rpx;
 }
 .nav__ico {
-  font-size: 14px;
+  font-size: 28rpx;
   opacity: 0.6;
 }
 .nav__input {
   flex: 1;
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .nav__clear {
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-tertiary);
 }
 .nav__cancel {
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-primary);
 }
 .suggest {
@@ -280,62 +280,62 @@ function goBack() {
 .suggest__item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 13px 16px;
-  border-bottom: 1px solid var(--color-border-light);
+  gap: 20rpx;
+  padding: 26rpx 32rpx;
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .suggest__ico {
-  font-size: 14px;
+  font-size: 28rpx;
   opacity: 0.5;
 }
 .suggest__text {
   flex: 1;
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-primary);
 }
 .suggest__sub {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-primary);
   font-weight: 700;
 }
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 32rpx;
 }
 .section-title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .history__clear {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-tertiary);
   font-weight: 400;
 }
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
 }
 .chip {
-  padding: 8px 16px;
+  padding: 16rpx 32rpx;
   background: var(--color-surface);
   border-radius: var(--radius-pill);
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-primary);
   box-shadow: var(--shadow-card);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12rpx;
 }
 .chip__rank {
   font-family: var(--font-number);
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-tertiary);
   font-weight: 700;
 }
@@ -351,40 +351,40 @@ function goBack() {
 .sortbar {
   display: flex;
   background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .sortbar__item {
   flex: 1;
   text-align: center;
-  padding: 12px 0;
-  font-size: 13px;
+  padding: 24rpx 0;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 4rpx;
 }
 .sortbar__item.on {
   color: var(--color-primary);
   font-weight: 700;
 }
 .sortbar__arrow {
-  font-size: 11px;
+  font-size: 22rpx;
 }
 .result__list {
   flex: 1;
   min-height: 0;
-  padding: 12px 16px;
+  padding: 24rpx 32rpx;
 }
 .result-tip {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .empty {
   text-align: center;
   color: var(--color-text-tertiary);
-  font-size: 14px;
-  padding: 40px 0;
+  font-size: 28rpx;
+  padding: 80rpx 0;
 }
 </style>

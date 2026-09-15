@@ -30,7 +30,7 @@
       </view>
     </view>
 
-    <view class="safe" style="height: 96px"></view>
+    <view class="safe" style="height: 192rpx"></view>
 
     <view class="compliance-fixed"><fb-compliance-bar /></view>
 
@@ -131,58 +131,58 @@ function goResult() {
   background: var(--color-bg);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .amount-box {
   background: var(--gradient-primary-btn);
   color: #fff;
-  padding: 28px 16px 32px;
+  padding: 56rpx 32rpx 64rpx;
   text-align: center;
 }
 .amount-box__label {
-  font-size: 13px;
+  font-size: 26rpx;
   opacity: 0.9;
 }
 .amount-box__num {
-  font-size: 44px;
+  font-size: 88rpx;
   font-weight: 700;
-  margin: 6px 0;
+  margin: 12rpx 0;
 }
 .amount-box__countdown {
-  font-size: 13px;
+  font-size: 26rpx;
   opacity: 0.9;
 }
 .methods {
-  margin: 16px;
+  margin: 32rpx;
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 16px;
+  padding: 32rpx;
   box-shadow: var(--shadow-card);
 }
 .methods__title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .method {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--color-border-light);
+  gap: 24rpx;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .method:last-child {
   border-bottom: none;
 }
 .method__ico {
-  font-size: 24px;
+  font-size: 48rpx;
 }
 .method__body {
   flex: 1;
@@ -190,27 +190,27 @@ function goResult() {
   flex-direction: column;
 }
 .method__name {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 500;
 }
 .method__desc {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
 }
 .method__radio {
-  width: 20px;
-  height: 20px;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
-  border: 2px solid var(--color-border);
+  border: 4rpx solid var(--color-border);
 }
 .method__radio.on {
   border-color: var(--color-primary);
   background: var(--color-primary);
-  box-shadow: inset 0 0 0 3px #fff;
+  box-shadow: inset 0 0 0 6rpx #fff;
 }
 .compliance-fixed {
   position: fixed;
-  bottom: 56px;
+  bottom: 112rpx;
   left: 0;
   right: 0;
   background: var(--color-bg);
@@ -221,8 +221,8 @@ function goResult() {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 56px;
-  padding: 0 16px env(safe-area-inset-bottom);
+  height: 112rpx;
+  padding: 0 32rpx env(safe-area-inset-bottom);
   background: var(--color-surface);
   display: flex;
   align-items: center;
@@ -230,12 +230,12 @@ function goResult() {
 }
 .footbar__btn {
   flex: 1;
-  height: 44px;
-  line-height: 44px;
+  height: 88rpx;
+  line-height: 88rpx;
   text-align: center;
   background: var(--gradient-primary-btn);
   color: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-primary-glow);
@@ -252,25 +252,25 @@ function goResult() {
   width: 100%;
   background: var(--color-surface);
   border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
-  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  padding: 48rpx 32rpx calc(48rpx + env(safe-area-inset-bottom));
 }
 .pwd__title {
   text-align: center;
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 40rpx;
 }
 .pwd__dots {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 24rpx;
+  margin-bottom: 48rpx;
 }
 .pwd__dot {
-  width: 14px;
-  height: 14px;
+  width: 28rpx;
+  height: 28rpx;
   border-radius: 50%;
-  border: 1px solid var(--color-border);
+  border: 2rpx solid var(--color-border);
 }
 .pwd__dot.on {
   background: var(--color-primary);
@@ -280,10 +280,10 @@ function goResult() {
   background: var(--gradient-primary-btn);
   color: #fff;
   text-align: center;
-  height: 48px;
-  line-height: 48px;
+  height: 96rpx;
+  line-height: 96rpx;
   border-radius: var(--radius-pill);
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
 }
 </style>

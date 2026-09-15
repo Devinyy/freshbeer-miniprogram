@@ -46,7 +46,7 @@
           储值卡支付立享专享价，本单可省 ¥{{ formatPrice((currentPrice - currentStoragePrice) * qty) }}
         </view>
 
-        <view style="height: 12px"></view>
+        <view style="height: 24rpx"></view>
       </scroll-view>
 
       <view class="sheet__foot">
@@ -160,19 +160,19 @@ function onConfirm() {
   position: relative;
 }
 .sheet__thumb {
-  width: 60px;
-  height: 60px;
+  width: 120rpx;
+  height: 120rpx;
   border-radius: var(--radius-image);
   background: var(--gradient-beer-glass);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 60rpx;
   flex-shrink: 0;
 }
 .sheet__head-info {
   flex: 1;
-  margin-left: 12px;
+  margin-left: 24rpx;
   min-width: 0;
 }
 .sheet__name {
@@ -182,8 +182,8 @@ function onConfirm() {
 .sheet__price-row {
   display: flex;
   align-items: baseline;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 16rpx;
+  margin-top: 8rpx;
 }
 .sheet__price {
   color: var(--color-primary);
@@ -194,25 +194,25 @@ function onConfirm() {
   font-size: var(--text-caption);
   color: var(--color-storage-exclusive);
   background: var(--color-storage-exclusive-bg);
-  padding: 1px 6px;
+  padding: 2rpx 12rpx;
   border-radius: var(--radius-tag);
 }
 .sheet__selected {
   font-size: var(--text-caption);
   color: var(--color-text-secondary);
-  margin-top: 4px;
+  margin-top: 8rpx;
 }
 .sheet__close {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 28px;
-  height: 28px;
+  top: 24rpx;
+  right: 24rpx;
+  width: 56rpx;
+  height: 56rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-text-secondary);
-  font-size: 18px;
+  font-size: 36rpx;
 }
 .sheet__body {
   flex: 1;
@@ -226,22 +226,22 @@ function onConfirm() {
   font-size: var(--text-body);
   font-weight: 600;
   color: var(--color-text-primary);
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 .group__opts {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20rpx;
 }
 .opt {
-  padding: 8px 16px;
-  border: 1px solid var(--color-border);
+  padding: 16rpx 32rpx;
+  border: 2rpx solid var(--color-border);
   border-radius: var(--radius-button);
   font-size: var(--text-body);
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12rpx;
 }
 .opt--active {
   border-color: var(--color-primary);
@@ -256,22 +256,22 @@ function onConfirm() {
 .stepper {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 32rpx;
 }
 .stepper__btn {
-  width: 32px;
-  height: 32px;
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 50%;
-  border: 1px solid var(--color-border);
+  border: 2rpx solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 40rpx;
   color: var(--color-text-secondary);
 }
 .stepper__num {
   font-size: var(--text-body-l);
-  min-width: 24px;
+  min-width: 48rpx;
   text-align: center;
 }
 .storage-tip {
@@ -279,16 +279,16 @@ function onConfirm() {
   font-size: var(--text-caption);
   color: var(--color-storage-exclusive);
   background: var(--color-storage-exclusive-bg);
-  padding: 8px 12px;
+  padding: 16rpx 24rpx;
   border-radius: var(--radius-input);
   line-height: 1.5;
 }
 .sheet__foot {
   display: flex;
   align-items: center;
-  padding: 12px var(--space-md);
-  border-top: 1px solid var(--color-border-light);
-  gap: 12px;
+  padding: 24rpx var(--space-md);
+  border-top: 2rpx solid var(--color-border-light);
+  gap: 24rpx;
 }
 .sheet__total {
   flex: 1;
@@ -305,9 +305,9 @@ function onConfirm() {
   color: #fff;
   font-size: var(--text-body-l);
   font-weight: 600;
-  padding: 0 32px;
-  height: 44px;
-  line-height: 44px;
+  padding: 0 64rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-primary-glow);
 }

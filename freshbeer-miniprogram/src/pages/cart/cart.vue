@@ -52,14 +52,14 @@
         </scroll-view>
       </view>
 
-      <view style="height: 110px"></view>
+      <view style="height: 220rpx"></view>
     </scroll-view>
 
     <view class="empty" v-else>
       <fb-icon class="empty__icon" name="cart" :size="42" color="#8B7D6B" />
       <text class="empty__text">购物车还是空的</text>
       <view class="empty__btn" @tap="goHome">去逛逛</view>
-      <view style="height: 120px"></view>
+      <view style="height: 240rpx"></view>
     </view>
 
     <view class="compliance-fixed" v-if="cart.items.length"><fb-compliance-bar /></view>
@@ -193,18 +193,18 @@ function goHome() {
   background: var(--color-bg);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .nav__clear {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
 }
 .content {
@@ -212,16 +212,16 @@ function goHome() {
   overflow-y: auto;
 }
 .coupon {
-  margin: 12px 16px;
-  padding: 12px 16px;
+  margin: 24rpx 32rpx;
+  padding: 24rpx 32rpx;
   background: linear-gradient(135deg, #fff0d6, #ffe0b3);
   border-radius: var(--radius-button);
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20rpx;
 }
 .coupon__ico {
-  font-size: 22px;
+  font-size: 44rpx;
 }
 .coupon__body {
   flex: 1;
@@ -229,41 +229,41 @@ function goHome() {
   flex-direction: column;
 }
 .coupon__title {
-  font-size: 13px;
+  font-size: 26rpx;
   font-weight: 600;
   color: var(--color-secondary-dark);
 }
 .coupon__sub {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-secondary-brown);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .coupon__arrow {
   color: var(--color-primary);
   font-weight: 600;
-  font-size: 13px;
+  font-size: 26rpx;
 }
 .list {
-  margin: 0 16px;
+  margin: 0 32rpx;
 }
 .item {
   display: flex;
-  gap: 12px;
+  gap: 24rpx;
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 12px;
+  padding: 24rpx;
   box-shadow: var(--shadow-card);
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
   position: relative;
 }
 .item__img {
-  width: 64px;
-  height: 64px;
+  width: 128rpx;
+  height: 128rpx;
   border-radius: var(--radius-image);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 60rpx;
   flex-shrink: 0;
 }
 .item__body {
@@ -273,13 +273,13 @@ function goHome() {
   flex-direction: column;
 }
 .item__name {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 500;
 }
 .item__spec {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .item__bottom {
   margin-top: auto;
@@ -290,27 +290,27 @@ function goHome() {
 .item__price {
   color: var(--color-primary);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 32rpx;
 }
 .item__del {
-  font-size: 16px;
+  font-size: 32rpx;
   color: var(--color-text-tertiary);
-  padding: 4px;
+  padding: 8rpx;
 }
 .stepper {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .stepper__btn {
-  width: 28px;
-  height: 28px;
+  width: 56rpx;
+  height: 56rpx;
   border-radius: 50%;
-  border: 1px solid var(--color-border);
+  border: 2rpx solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 36rpx;
   color: var(--color-text-secondary);
 }
 .stepper__btn--add {
@@ -319,25 +319,25 @@ function goHome() {
   color: #fff;
 }
 .stepper__num {
-  font-size: 15px;
-  min-width: 20px;
+  font-size: 30rpx;
+  min-width: 40rpx;
   text-align: center;
 }
 .addon {
-  margin: 4px 16px 0;
+  margin: 8rpx 32rpx 0;
 }
 .addon__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20rpx;
 }
 .addon__title {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 700;
 }
 .addon__tip {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-warning);
 }
 .addon__scroll {
@@ -346,45 +346,45 @@ function goHome() {
 .addon__item {
   display: inline-flex;
   flex-direction: column;
-  width: 96px;
-  margin-right: 10px;
+  width: 192rpx;
+  margin-right: 20rpx;
   vertical-align: top;
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 8px;
+  padding: 16rpx;
   box-shadow: var(--shadow-card);
 }
 .addon__img {
-  width: 80px;
-  height: 80px;
+  width: 160rpx;
+  height: 160rpx;
   border-radius: var(--radius-image);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 34px;
+  font-size: 68rpx;
 }
 .addon__name {
-  font-size: 12px;
-  margin-top: 6px;
+  font-size: 24rpx;
+  margin-top: 12rpx;
 }
 .addon__bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 4px;
+  margin-top: 8rpx;
 }
 .addon__price {
-  font-size: 13px;
+  font-size: 26rpx;
   font-weight: 700;
   color: var(--color-primary);
 }
 .addon__add {
-  width: 24px;
-  height: 24px;
+  width: 48rpx;
+  height: 48rpx;
   border-radius: 50%;
   background: var(--color-primary);
   color: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -397,27 +397,27 @@ function goHome() {
   justify-content: center;
 }
 .empty__icon {
-  font-size: 64px;
+  font-size: 128rpx;
   opacity: 0.4;
 }
 .empty__text {
-  margin-top: 12px;
+  margin-top: 24rpx;
   color: var(--color-text-secondary);
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .empty__btn {
-  margin-top: 20px;
+  margin-top: 40rpx;
   background: var(--gradient-primary-btn);
   color: #fff;
-  padding: 10px 32px;
+  padding: 20rpx 64rpx;
   border-radius: var(--radius-pill);
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 600;
   box-shadow: var(--shadow-primary-glow);
 }
 .compliance-fixed {
   position: fixed;
-  bottom: calc(56px + env(safe-area-inset-bottom));
+  bottom: calc(112rpx + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
   background: var(--color-bg);
@@ -427,14 +427,14 @@ function goHome() {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: calc(56px + env(safe-area-inset-bottom));
-  height: 56px;
+  bottom: calc(112rpx + env(safe-area-inset-bottom));
+  height: 112rpx;
   background: var(--color-surface);
-  border-top: 1px solid var(--color-border-light);
+  border-top: 2rpx solid var(--color-border-light);
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  gap: 12px;
+  padding: 0 32rpx;
+  gap: 24rpx;
   z-index: 20;
 }
 .footbar__left {
@@ -445,29 +445,29 @@ function goHome() {
 .footbar__price-row {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 16rpx;
 }
 .footbar__total {
-  font-size: 20px;
+  font-size: 40rpx;
   font-weight: 700;
   color: var(--color-primary);
 }
 .footbar__cut {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-flash-sale);
 }
 .footbar__tip {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-text-tertiary);
 }
 .footbar__btn {
   background: var(--gradient-primary-btn);
   color: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
-  padding: 0 28px;
-  height: 44px;
-  line-height: 44px;
+  padding: 0 56rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-primary-glow);
 }

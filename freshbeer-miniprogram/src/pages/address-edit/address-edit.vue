@@ -39,7 +39,7 @@
         <view class="switch" :class="{ on: form.isDefault }"><view class="switch__dot"></view></view>
       </view>
 
-      <view style="height: 100px"></view>
+      <view style="height: 200rpx"></view>
     </scroll-view>
 
     <view class="footbar">
@@ -133,32 +133,32 @@ function save() {
   background: var(--color-bg);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 16px;
+  padding: 24rpx 32rpx;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 4px 16px;
+  padding: 8rpx 32rpx;
   box-shadow: var(--shadow-card);
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .field {
   display: flex;
   align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--color-border-light);
+  padding: 28rpx 0;
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .field:last-child {
   border-bottom: none;
@@ -167,45 +167,45 @@ function save() {
   align-items: flex-start;
 }
 .field__label {
-  width: 80px;
-  font-size: 14px;
+  width: 160rpx;
+  font-size: 28rpx;
   color: var(--color-text-primary);
   flex-shrink: 0;
 }
 .field__input {
   flex: 1;
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .field__map {
   flex: 1;
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-primary);
   text-align: right;
 }
 .field__area {
   width: 100%;
-  height: 60px;
-  font-size: 14px;
+  height: 120rpx;
+  font-size: 28rpx;
 }
 .tags {
   display: flex;
   align-items: center;
-  padding: 14px 16px;
+  padding: 28rpx 32rpx;
 }
 .tags__label {
-  width: 80px;
-  font-size: 14px;
+  width: 160rpx;
+  font-size: 28rpx;
 }
 .tags__opts {
   flex: 1;
   display: flex;
-  gap: 10px;
+  gap: 20rpx;
 }
 .tag-opt {
-  padding: 5px 14px;
-  border: 1px solid var(--color-border);
+  padding: 10rpx 28rpx;
+  border: 2rpx solid var(--color-border);
   border-radius: var(--radius-pill);
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
 }
 .tag-opt.on {
@@ -217,15 +217,15 @@ function save() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: 32rpx;
 }
 .default__label {
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .switch {
-  width: 44px;
-  height: 24px;
-  border-radius: 12px;
+  width: 88rpx;
+  height: 48rpx;
+  border-radius: 24rpx;
   background: var(--color-border);
   position: relative;
   transition: background 0.2s;
@@ -235,31 +235,31 @@ function save() {
 }
 .switch__dot {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
+  top: 4rpx;
+  left: 4rpx;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
   background: #fff;
   transition: transform 0.2s;
 }
 .switch.on .switch__dot {
-  transform: translateX(20px);
+  transform: translateX(40rpx);
 }
 .footbar {
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
+  left: 32rpx;
+  right: 32rpx;
+  bottom: calc(32rpx + env(safe-area-inset-bottom));
   z-index: 20;
 }
 .footbar__btn {
-  height: 48px;
-  line-height: 48px;
+  height: 96rpx;
+  line-height: 96rpx;
   text-align: center;
   background: var(--gradient-primary-btn);
   color: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-primary-glow);

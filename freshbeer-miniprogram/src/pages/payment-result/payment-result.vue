@@ -47,7 +47,7 @@
       <view class="act act--primary" @tap="goDetail">查看配送</view>
     </view>
 
-    <view style="height: 24px"></view>
+    <view style="height: 48rpx"></view>
     <fb-compliance-bar />
   </view>
 </template>
@@ -97,65 +97,65 @@ function goDetail() {
   padding-bottom: env(safe-area-inset-bottom);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .result {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 0 28px;
+  padding: 48rpx 0 56rpx;
 }
 .result__icon {
-  width: 72px;
-  height: 72px;
+  width: 144rpx;
+  height: 144rpx;
   border-radius: 50%;
   background: var(--color-success);
   color: #fff;
-  font-size: 40px;
+  font-size: 80rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: scale(0.4);
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.35);
+  box-shadow: 0 12rpx 40rpx rgba(76, 175, 80, 0.35);
 }
 .result__icon--in {
   transform: scale(1);
   opacity: 1;
 }
 .result__title {
-  font-size: 20px;
+  font-size: 40rpx;
   font-weight: 700;
-  margin-top: 16px;
+  margin-top: 32rpx;
 }
 .result__amount {
-  font-size: 32px;
+  font-size: 64rpx;
   font-weight: 700;
   color: var(--color-primary);
-  margin-top: 8px;
+  margin-top: 16rpx;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  margin: 0 16px 12px;
-  padding: 16px;
+  margin: 0 32rpx 24rpx;
+  padding: 32rpx;
   box-shadow: var(--shadow-card);
 }
 .progress__row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .progress__ico {
-  font-size: 26px;
+  font-size: 52rpx;
 }
 .progress__body {
   flex: 1;
@@ -163,21 +163,21 @@ function goDetail() {
   flex-direction: column;
 }
 .progress__title {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 600;
 }
 .progress__sub {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .progress__bar {
   display: flex;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 32rpx;
 }
 .progress__step {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-text-tertiary);
   white-space: nowrap;
 }
@@ -191,9 +191,9 @@ function goDetail() {
 }
 .progress__line {
   flex: 1;
-  height: 2px;
+  height: 4rpx;
   background: var(--color-border);
-  margin: 0 6px;
+  margin: 0 12rpx;
 }
 .progress__line.done {
   background: var(--color-success);
@@ -207,62 +207,62 @@ function goDetail() {
   justify-content: space-between;
 }
 .recharge__title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
   color: var(--color-secondary-dark);
 }
 .recharge__badge {
-  font-size: 11px;
+  font-size: 22rpx;
   background: var(--color-flash-sale);
   color: #fff;
-  padding: 2px 8px;
+  padding: 4rpx 16rpx;
   border-radius: var(--radius-tag);
 }
 .recharge__desc {
   display: block;
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-secondary-brown);
-  margin-top: 8px;
+  margin-top: 16rpx;
   line-height: 1.5;
 }
 .recharge__opts {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 20rpx;
+  margin-top: 28rpx;
 }
 .recharge__opt {
   flex: 1;
   background: var(--color-surface);
-  border: 1px solid var(--color-primary);
+  border: 2rpx solid var(--color-primary);
   border-radius: var(--radius-card);
-  padding: 12px 0;
+  padding: 24rpx 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4rpx;
 }
 .recharge__opt-amount {
-  font-size: 18px;
+  font-size: 36rpx;
   font-weight: 700;
   color: var(--color-primary);
 }
 .recharge__opt-gift {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-flash-sale);
 }
 .actions {
   display: flex;
-  gap: 12px;
-  margin: 4px 16px 0;
+  gap: 24rpx;
+  margin: 8rpx 32rpx 0;
 }
 .act {
   flex: 1;
   text-align: center;
-  height: 46px;
-  line-height: 46px;
-  border: 1px solid var(--color-border);
+  height: 92rpx;
+  line-height: 92rpx;
+  border: 2rpx solid var(--color-border);
   border-radius: var(--radius-pill);
-  font-size: 15px;
+  font-size: 30rpx;
   color: var(--color-text-primary);
 }
 .act--primary {

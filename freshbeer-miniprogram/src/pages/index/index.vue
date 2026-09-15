@@ -33,7 +33,7 @@
             @tap="goProduct"
           />
           <view class="list__placeholder" v-if="products.length === 0">该分类暂未上架商品</view>
-          <view style="height: 90px"></view>
+          <view style="height: 180rpx"></view>
         </view>
       </scroll-view>
     </view>
@@ -172,51 +172,51 @@ function goAddress() {
   padding-top: env(safe-area-inset-top);
 }
 .nav__bar {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 8px;
+  padding: 0 24rpx;
+  gap: 16rpx;
 }
-.nav__bar--search { height: 44px; padding-top: 0; margin-bottom: 4px; }
+.nav__bar--search { height: 88rpx; padding-top: 0; margin-bottom: 8rpx; }
 .nav__addr {
   display: flex;
   align-items: center;
   min-width: 0;
-  max-width: 110px;
-  gap: 2px;
+  max-width: 220rpx;
+  gap: 4rpx;
 }
 .nav__pin {
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .nav__addr-text {
   min-width: 0;
-  font-size: 13px;
+  font-size: 26rpx;
   font-weight: 600;
   color: var(--color-text-primary);
 }
 .nav__arrow {
-  font-size: 10px;
+  font-size: 20rpx;
   color: var(--color-text-secondary);
 }
 .nav__search {
   flex: 1;
   min-width: 0;
-  height: 36px;
+  height: 72rpx;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 18px;
+  border: 2rpx solid var(--color-border);
+  border-radius: 36rpx;
   display: flex;
   align-items: center;
-  padding: 0 12px;
-  gap: 6px;
+  padding: 0 24rpx;
+  gap: 12rpx;
 }
 .nav__search-ico {
-  font-size: 14px;
+  font-size: 28rpx;
   opacity: 0.6;
 }
 .nav__search-ph {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-tertiary);
 }
 .body {
@@ -230,20 +230,20 @@ function goAddress() {
   flex: 1;
   min-width: 0;
   background: var(--color-surface);
-  border-left: 1px solid var(--color-border-light);
+  border-left: 2rpx solid var(--color-border-light);
 }
 .list__inner {
-  padding: 12px;
+  padding: 24rpx;
 }
 .list__placeholder {
   text-align: center;
   color: var(--color-text-tertiary);
-  font-size: 13px;
-  padding: 40px 0;
+  font-size: 26rpx;
+  padding: 80rpx 0;
 }
 .compliance-wrap {
   position: fixed;
-  bottom: calc(56px + env(safe-area-inset-bottom));
+  bottom: calc(112rpx + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
   background: var(--color-bg);

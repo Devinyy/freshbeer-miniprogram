@@ -26,22 +26,22 @@ defineEmits(['change'])
 
 <style scoped>
 .nav {
-  width: 88px;
+  width: 176rpx;
   height: 100%;
   background: var(--color-surface-alt);
   flex-shrink: 0;
 }
 .nav__item {
-  min-height: 48px;
+  min-height: 96rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  font-size: 13px;
+  gap: 4rpx;
+  font-size: 26rpx;
   color: var(--color-text-primary);
   position: relative;
-  padding: 4px 0;
+  padding: 8rpx 0;
 }
 .nav__item--active {
   background: var(--color-primary-light);
@@ -52,11 +52,11 @@ defineEmits(['change'])
   content: '';
   position: absolute;
   left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 3px;
+  top: 16rpx;
+  bottom: 16rpx;
+  width: 6rpx;
   background: var(--color-primary);
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 4rpx 4rpx 0;
 }
 .nav__item--comp {
   color: var(--color-danger);
@@ -68,6 +68,6 @@ defineEmits(['change'])
   display: block;
 }
 .nav__text {
-  font-size: 12px;
+  font-size: 24rpx;
 }
 </style>

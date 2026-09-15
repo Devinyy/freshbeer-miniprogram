@@ -93,7 +93,7 @@
         </view>
       </view>
 
-      <view style="height: 90px"></view>
+      <view style="height: 180rpx"></view>
     </scroll-view>
 
     <view class="compliance-fixed"><fb-compliance-bar /></view>
@@ -231,34 +231,34 @@ function goAddress() {
   background: var(--color-bg);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 16px;
+  padding: 24rpx 32rpx;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 16px;
+  padding: 32rpx;
   box-shadow: var(--shadow-card);
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .addr {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .addr__pin {
-  font-size: 22px;
+  font-size: 44rpx;
 }
 .addr__body {
   flex: 1;
@@ -266,47 +266,47 @@ function goAddress() {
 }
 .addr__line1 {
   display: flex;
-  gap: 12px;
+  gap: 24rpx;
   align-items: baseline;
 }
 .addr__name {
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 700;
 }
 .addr__phone {
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-secondary);
 }
 .addr__detail {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
-  margin-top: 4px;
+  margin-top: 8rpx;
 }
 .addr__empty {
-  font-size: 15px;
+  font-size: 30rpx;
   color: var(--color-primary);
   font-weight: 600;
 }
 .addr__arrow {
   color: var(--color-text-tertiary);
-  font-size: 18px;
+  font-size: 36rpx;
 }
 .block__title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .seg {
   display: flex;
-  gap: 10px;
+  gap: 20rpx;
 }
 .seg__item {
   flex: 1;
   text-align: center;
-  padding: 10px 0;
-  border: 1px solid var(--color-border);
+  padding: 20rpx 0;
+  border: 2rpx solid var(--color-border);
   border-radius: var(--radius-button);
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-primary);
 }
 .seg__item.on {
@@ -316,8 +316,8 @@ function goAddress() {
   font-weight: 600;
 }
 .appoint-tip {
-  margin-top: 12px;
-  font-size: 13px;
+  margin-top: 24rpx;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
 }
 .appoint-tip__val {
@@ -327,32 +327,32 @@ function goAddress() {
 .pay {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--color-border-light);
+  gap: 20rpx;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .pay:last-child {
   border-bottom: none;
 }
 .pay__ico {
-  font-size: 22px;
+  font-size: 44rpx;
 }
 .pay__name {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 500;
 }
 .pay__desc {
   flex: 1;
   text-align: right;
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
-  margin-right: 8px;
+  margin-right: 16rpx;
 }
 .pay__radio {
-  width: 20px;
-  height: 20px;
+  width: 40rpx;
+  height: 40rpx;
   border-radius: 50%;
-  border: 2px solid var(--color-border);
+  border: 4rpx solid var(--color-border);
   margin-left: auto;
 }
 .pay__desc + .pay__radio {
@@ -361,28 +361,28 @@ function goAddress() {
 .pay__radio.on {
   border-color: var(--color-primary);
   background: var(--color-primary);
-  box-shadow: inset 0 0 0 3px #fff;
+  box-shadow: inset 0 0 0 6rpx #fff;
 }
 .remark {
-  font-size: 14px;
-  height: 24px;
+  font-size: 28rpx;
+  height: 48rpx;
   width: 100%;
 }
 .order-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 0;
+  gap: 24rpx;
+  padding: 16rpx 0;
 }
 .order-item__img {
-  width: 48px;
-  height: 48px;
+  width: 96rpx;
+  height: 96rpx;
   border-radius: var(--radius-image);
   background: var(--gradient-beer-glass);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 48rpx;
   flex-shrink: 0;
 }
 .order-item__body {
@@ -390,45 +390,45 @@ function goAddress() {
   min-width: 0;
 }
 .order-item__name {
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .order-item__spec {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
 }
 .order-item__price {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 700;
   color: var(--color-primary);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .order-item__qty {
   color: var(--color-text-secondary);
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .fee {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-primary);
-  padding: 6px 0;
+  padding: 12rpx 0;
 }
 .fee--cut {
   color: var(--color-danger);
 }
 .fee--total {
-  border-top: 1px solid var(--color-border-light);
-  margin-top: 6px;
-  padding-top: 12px;
+  border-top: 2rpx solid var(--color-border-light);
+  margin-top: 12rpx;
+  padding-top: 24rpx;
   font-weight: 700;
 }
 .fee--total .num {
   color: var(--color-primary);
-  font-size: 18px;
+  font-size: 36rpx;
 }
 .compliance-fixed {
   position: fixed;
-  bottom: 56px;
+  bottom: 112rpx;
   left: 0;
   right: 0;
   background: var(--color-bg);
@@ -439,33 +439,33 @@ function goAddress() {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 56px;
+  height: 112rpx;
   background: var(--color-surface);
-  border-top: 1px solid var(--color-border-light);
+  border-top: 2rpx solid var(--color-border-light);
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  gap: 12px;
+  padding: 0 32rpx;
+  gap: 24rpx;
   z-index: 20;
 }
 .footbar__total {
   flex: 1;
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-secondary);
 }
 .footbar__total .num {
   color: var(--color-primary);
-  font-size: 20px;
+  font-size: 40rpx;
   font-weight: 700;
 }
 .footbar__btn {
   background: var(--gradient-primary-btn);
   color: #fff;
-  font-size: 16px;
+  font-size: 32rpx;
   font-weight: 600;
-  padding: 0 40px;
-  height: 44px;
-  line-height: 44px;
+  padding: 0 80rpx;
+  height: 88rpx;
+  line-height: 88rpx;
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-primary-glow);
 }

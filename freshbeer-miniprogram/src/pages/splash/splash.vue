@@ -55,17 +55,17 @@ onLoad(() => {
   opacity: 0;
 }
 .logo {
-  margin-bottom: 24px;
+  margin-bottom: 48rpx;
 }
 .logo__glass {
-  width: 88px;
-  height: 110px;
+  width: 176rpx;
+  height: 220rpx;
   background: rgba(255, 255, 255, 0.22);
-  border: 3px solid rgba(255, 255, 255, 0.85);
-  border-radius: 10px 10px 16px 16px;
+  border: 6rpx solid rgba(255, 255, 255, 0.85);
+  border-radius: 20rpx 20rpx 32rpx 32rpx;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(61, 40, 23, 0.3);
+  box-shadow: 0 16rpx 48rpx rgba(61, 40, 23, 0.3);
 }
 .logo__beer {
   position: absolute;
@@ -81,7 +81,7 @@ onLoad(() => {
   left: 0;
   right: 0;
   top: 16%;
-  height: 16px;
+  height: 32rpx;
   background: #fff;
   border-radius: 50%;
   z-index: 2;
@@ -95,26 +95,26 @@ onLoad(() => {
   }
 }
 .brand {
-  font-size: 34px;
+  font-size: 68rpx;
   font-weight: 700;
   color: #fff;
-  letter-spacing: 4px;
-  text-shadow: 0 2px 8px rgba(61, 40, 23, 0.35);
+  letter-spacing: 8rpx;
+  text-shadow: 0 4rpx 16rpx rgba(61, 40, 23, 0.35);
 }
 .slogan {
-  font-size: 15px;
+  font-size: 30rpx;
   color: rgba(255, 255, 255, 0.92);
-  margin-top: 10px;
-  letter-spacing: 2px;
+  margin-top: 20rpx;
+  letter-spacing: 4rpx;
 }
 .dots {
   display: flex;
-  gap: 8px;
-  margin-top: 32px;
+  gap: 16rpx;
+  margin-top: 64rpx;
 }
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 16rpx;
+  height: 16rpx;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.75);
   animation: bounce 1s infinite ease-in-out;
@@ -126,19 +126,19 @@ onLoad(() => {
     opacity: 0.6;
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-12rpx);
     opacity: 1;
   }
 }
 .splash__foot {
   position: absolute;
-  bottom: calc(24px + env(safe-area-inset-bottom));
+  bottom: calc(48rpx + env(safe-area-inset-bottom));
   left: 0;
   right: 0;
   text-align: center;
 }
 .splash__warn {
-  font-size: 11px;
+  font-size: 22rpx;
   color: rgba(255, 255, 255, 0.85);
 }
 @media (prefers-reduced-motion: reduce) {

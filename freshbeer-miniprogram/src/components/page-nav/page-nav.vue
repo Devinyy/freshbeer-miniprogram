@@ -21,8 +21,8 @@ function goBack() {
 </script>
 
 <style scoped>
-.page-nav { box-sizing: border-box; display: flex; align-items: center; padding-left: 12px; padding-right: 12px; background: var(--color-bg); }
-.page-nav__back, .page-nav__placeholder { width: 32px; flex: 0 0 32px; }
-.page-nav__back { color: var(--color-text-primary); font-size: 30px; line-height: 32px; }
-.page-nav__title { flex: 1; text-align: center; color: var(--color-text-primary); font-size: 17px; font-weight: 600; }
+.page-nav { box-sizing: border-box; display: flex; align-items: center; padding-left: 24rpx; padding-right: 24rpx; background: var(--color-bg); }
+.page-nav__back, .page-nav__placeholder { width: 64rpx; flex: 0 0 64rpx; }
+.page-nav__back { color: var(--color-text-primary); font-size: 60rpx; line-height: 64rpx; }
+.page-nav__title { flex: 1; text-align: center; color: var(--color-text-primary); font-size: 34rpx; font-weight: 600; }
 </style>

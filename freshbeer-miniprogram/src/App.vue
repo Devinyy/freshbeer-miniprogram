@@ -78,44 +78,44 @@ export default {
   --font-number: 'DIN Alternate', 'DIN', 'Roboto Mono', 'SF Mono', 'Menlo', monospace;
 
   /* 字号 */
-  --text-display: 32px;
-  --text-h1: 24px;
-  --text-h2: 20px;
-  --text-h3: 18px;
-  --text-body-l: 16px;
-  --text-body: 14px;
-  --text-caption: 12px;
-  --text-micro: 10px;
-  --text-price-l: 20px;
-  --text-price-m: 16px;
-  --text-price-s: 14px;
+  --text-display: 64rpx;
+  --text-h1: 48rpx;
+  --text-h2: 40rpx;
+  --text-h3: 36rpx;
+  --text-body-l: 32rpx;
+  --text-body: 28rpx;
+  --text-caption: 24rpx;
+  --text-micro: 20rpx;
+  --text-price-l: 40rpx;
+  --text-price-m: 32rpx;
+  --text-price-s: 28rpx;
 
   /* 间距 */
-  --space-xxs: 4px;
-  --space-xs: 8px;
-  --space-sm: 12px;
-  --space-md: 16px;
-  --space-lg: 20px;
-  --space-xl: 24px;
-  --space-page-margin: 16px;
-  --space-card-padding: 12px;
+  --space-xxs: 8rpx;
+  --space-xs: 16rpx;
+  --space-sm: 24rpx;
+  --space-md: 32rpx;
+  --space-lg: 40rpx;
+  --space-xl: 48rpx;
+  --space-page-margin: 32rpx;
+  --space-card-padding: 24rpx;
 
   /* 圆角 */
-  --radius-tag: 4px;
-  --radius-input: 8px;
-  --radius-image: 8px;
-  --radius-button: 8px;
-  --radius-card: 12px;
-  --radius-sheet: 16px;
-  --radius-pill: 24px;
-  --radius-circle: 999px;
+  --radius-tag: 8rpx;
+  --radius-input: 16rpx;
+  --radius-image: 16rpx;
+  --radius-button: 16rpx;
+  --radius-card: 24rpx;
+  --radius-sheet: 32rpx;
+  --radius-pill: 48rpx;
+  --radius-circle: 1998rpx;
 
   /* 阴影（暖色系） */
-  --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
-  --shadow-raised: 0 2px 8px rgba(44, 24, 16, 0.08);
-  --shadow-floating: 0 4px 16px rgba(44, 24, 16, 0.12);
-  --shadow-overlay: 0 8px 32px rgba(44, 24, 16, 0.16);
-  --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+  --shadow-card: 0 2rpx 8rpx rgba(44, 24, 16, 0.06);
+  --shadow-raised: 0 4rpx 16rpx rgba(44, 24, 16, 0.08);
+  --shadow-floating: 0 8rpx 32rpx rgba(44, 24, 16, 0.12);
+  --shadow-overlay: 0 16rpx 64rpx rgba(44, 24, 16, 0.16);
+  --shadow-primary-glow: 0 4rpx 16rpx rgba(245, 166, 35, 0.3);
 
   /* Z-index */
   --z-tabbar: 300;
@@ -156,18 +156,18 @@ page {
   --color-member-gold: #d4a843;
   --gradient-primary-btn: linear-gradient(135deg, #f5a623 0%, #e8951a 100%);
   --gradient-beer-glass: linear-gradient(180deg, #fff8f0 0%, #e8a317 30%, #3d2817 100%);
-  --shadow-card: 0 1px 4px rgba(44, 24, 16, .06);
-  --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, .3);
-  --radius-tag: 4px;
-  --radius-image: 8px;
-  --radius-button: 8px;
-  --radius-card: 12px;
-  --radius-pill: 24px;
-  --space-sm: 12px;
-  --space-card-padding: 12px;
-  --text-caption: 12px;
-  --text-micro: 10px;
-  --text-price-m: 16px;
+  --shadow-card: 0 2rpx 8rpx rgba(44, 24, 16, .06);
+  --shadow-primary-glow: 0 4rpx 16rpx rgba(245, 166, 35, .3);
+  --radius-tag: 8rpx;
+  --radius-image: 16rpx;
+  --radius-button: 16rpx;
+  --radius-card: 24rpx;
+  --radius-pill: 48rpx;
+  --space-sm: 24rpx;
+  --space-card-padding: 24rpx;
+  --text-caption: 24rpx;
+  --text-micro: 20rpx;
+  --text-price-m: 32rpx;
   background-color: var(--color-bg);
   font-family: var(--font-body);
   color: var(--color-text-primary);
@@ -187,7 +187,13 @@ text,
 button,
 input,
 textarea,
-image {
+image,
+scroll-view {
+  box-sizing: border-box;
+}
+
+/* 页面主内容区常用 flex + padding；将 padding 纳入高度，避免在小程序 scroll-view 内溢出。 */
+.content {
   box-sizing: border-box;
 }
 

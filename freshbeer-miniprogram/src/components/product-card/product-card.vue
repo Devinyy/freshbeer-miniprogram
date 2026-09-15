@@ -144,21 +144,21 @@ function onTap() {
   margin-bottom: var(--space-sm);
 }
 .card__img {
-  width: 80px;
-  height: 80px;
+  width: 160rpx;
+  height: 160rpx;
   border-radius: var(--radius-image);
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.card__product-image { width: 72px; height: 72px; }
+.card__product-image { width: 144rpx; height: 144rpx; }
 .card__emoji {
-  font-size: 36px;
+  font-size: 72rpx;
 }
 .card__img-label {
   color: rgba(255, 248, 240, 0.95);
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
   text-align: center;
   line-height: 1.2;
@@ -170,38 +170,38 @@ function onTap() {
   min-width: 0;
 }
 .card__title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 600;
   color: var(--color-text-primary);
 }
 .card__title-row {
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  gap: 8rpx;
   min-width: 0;
 }
 .card__number {
   flex-shrink: 0;
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-tertiary);
   font-weight: 700;
 }
 .card__sub {
   font-size: var(--text-caption);
   color: var(--color-text-secondary);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 6px;
+  gap: 8rpx;
+  margin-top: 12rpx;
 }
 .tag,
 .tag-storage {
   font-size: var(--text-micro);
   border-radius: var(--radius-tag);
-  padding: 2px 6px;
+  padding: 4rpx 12rpx;
   line-height: 1.4;
 }
 .tag--cold {
@@ -230,13 +230,13 @@ function onTap() {
   align-items: flex-end;
   justify-content: space-between;
   margin-top: auto;
-  padding-top: 6px;
+  padding-top: 12rpx;
   min-width: 0;
 }
 .price-box {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 12rpx;
   min-width: 0;
   overflow: hidden;
 }
@@ -260,12 +260,12 @@ function onTap() {
   font-weight: 400;
 }
 .btn-add {
-  width: 32px;
-  height: 32px;
+  width: 64rpx;
+  height: 64rpx;
   border-radius: 50%;
   background: var(--color-primary);
   color: #fff;
-  font-size: 20px;
+  font-size: 40rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -275,9 +275,9 @@ function onTap() {
   transform: scale(0.92);
 }
 .btn-spec {
-  height: 28px;
-  padding: 0 12px;
-  border: 1px solid var(--color-primary);
+  height: 56rpx;
+  padding: 0 24rpx;
+  border: 2rpx solid var(--color-primary);
   border-radius: var(--radius-button);
   color: var(--color-primary);
   font-size: var(--text-caption);
@@ -290,17 +290,17 @@ function onTap() {
 .stepper {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20rpx;
 }
 .stepper__btn {
-  width: 28px;
-  height: 28px;
+  width: 56rpx;
+  height: 56rpx;
   border-radius: 50%;
-  border: 1px solid var(--color-border);
+  border: 2rpx solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 36rpx;
   color: var(--color-text-secondary);
 }
 .stepper__btn--add {
@@ -310,7 +310,7 @@ function onTap() {
 }
 .stepper__num {
   font-size: var(--text-body);
-  min-width: 18px;
+  min-width: 36rpx;
   text-align: center;
 }
 .card--soldout {
@@ -325,15 +325,15 @@ function onTap() {
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 700;
 }
 .card__img {
   position: relative;
 }
 .btn-disabled {
-  height: 28px;
-  padding: 0 12px;
+  height: 56rpx;
+  padding: 0 24rpx;
   border-radius: var(--radius-button);
   background: var(--color-surface-alt);
   color: var(--color-text-tertiary);

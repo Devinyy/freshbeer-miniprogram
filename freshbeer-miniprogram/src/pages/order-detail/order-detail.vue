@@ -94,7 +94,7 @@
         <view class="act" v-else-if="order.refundStatus === 'pending'">退款处理中</view>
       </view>
 
-      <view style="height: 30px"></view>
+      <view style="height: 60rpx"></view>
     </scroll-view>
 
     <view class="empty" v-else>
@@ -225,26 +225,26 @@ function goOrder() {
   background: var(--color-bg);
 }
 .nav {
-  height: 44px;
+  height: 88rpx;
   display: flex;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 32rpx;
 }
 .nav__title {
-  font-size: 17px;
+  font-size: 34rpx;
   font-weight: 600;
 }
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 12px 16px;
+  padding: 24rpx 32rpx;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  padding: 16px;
+  padding: 32rpx;
   box-shadow: var(--shadow-card);
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .status__head {
   display: flex;
@@ -252,17 +252,17 @@ function goOrder() {
   align-items: center;
 }
 .status__text {
-  font-size: 18px;
+  font-size: 36rpx;
   font-weight: 700;
   color: var(--color-primary);
 }
 .status__track {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-primary);
 }
 .timeline {
   display: flex;
-  margin-top: 16px;
+  margin-top: 32rpx;
 }
 .tl {
   flex: 1;
@@ -271,14 +271,14 @@ function goOrder() {
   align-items: center;
   position: relative;
   color: var(--color-text-tertiary);
-  font-size: 12px;
+  font-size: 24rpx;
 }
 .tl__dot {
-  width: 12px;
-  height: 12px;
+  width: 24rpx;
+  height: 24rpx;
   border-radius: 50%;
   background: var(--color-border);
-  margin-bottom: 6px;
+  margin-bottom: 12rpx;
 }
 .tl.done {
   color: var(--color-primary);
@@ -289,10 +289,10 @@ function goOrder() {
 .rider {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .rider__ico {
-  font-size: 28px;
+  font-size: 56rpx;
 }
 .rider__body {
   flex: 1;
@@ -300,31 +300,31 @@ function goOrder() {
   flex-direction: column;
 }
 .rider__name {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 600;
 }
 .rider__eta {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-cold-chain);
 }
 .rider__call {
-  font-size: 22px;
+  font-size: 44rpx;
 }
 .map-card {
   padding: 0;
   overflow: hidden;
   position: relative;
-  height: 140px;
+  height: 280rpx;
 }
 .map-card__map {
   width: 100%;
-  height: 140px;
+  height: 280rpx;
 }
-.map-card__fallback { width: 100%; height: 140px; position: absolute; inset: 0; overflow: hidden; background: #e8eee8; }
-.map-card__road { position: absolute; height: 8px; width: 130%; left: -15%; background: #fff; box-shadow: 0 0 0 1px #d6dfd6; }
+.map-card__fallback { width: 100%; height: 280rpx; position: absolute; inset: 0; overflow: hidden; background: #e8eee8; }
+.map-card__road { position: absolute; height: 16rpx; width: 130%; left: -15%; background: #fff; box-shadow: 0 0 0 2rpx #d6dfd6; }
 .map-card__road--a { top: 34%; transform: rotate(18deg); }
 .map-card__road--b { top: 72%; transform: rotate(-14deg); }
-.map-card__fallback-pin, .map-card__fallback-home { position: absolute; font-size: 22px; }
+.map-card__fallback-pin, .map-card__fallback-home { position: absolute; font-size: 44rpx; }
 .map-card__fallback-pin { left: 28%; top: 42%; }
 .map-card__fallback-home { right: 20%; bottom: 18%; }
 .map-card__mask {
@@ -332,21 +332,21 @@ function goOrder() {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 8px 12px;
+  padding: 16rpx 24rpx;
   background: linear-gradient(180deg, rgba(255, 248, 240, 0), rgba(255, 248, 240, 0.9));
 }
 .map-card__text {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-primary);
   font-weight: 600;
 }
 .addr {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .addr__pin {
-  font-size: 20px;
+  font-size: 40rpx;
 }
 .addr__body {
   flex: 1;
@@ -354,41 +354,41 @@ function goOrder() {
 }
 .addr__line1 {
   display: flex;
-  gap: 12px;
+  gap: 24rpx;
 }
 .addr__name {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
 }
 .addr__phone {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
 }
 .addr__detail {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
-  margin-top: 4px;
+  margin-top: 8rpx;
 }
 .block__title {
-  font-size: 15px;
+  font-size: 30rpx;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 24rpx;
 }
 .order-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 0;
+  gap: 24rpx;
+  padding: 16rpx 0;
 }
 .order-item__img {
-  width: 44px;
-  height: 44px;
+  width: 88rpx;
+  height: 88rpx;
   border-radius: var(--radius-image);
   background: var(--gradient-beer-glass);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 44rpx;
   flex-shrink: 0;
 }
 .order-item__body {
@@ -396,57 +396,57 @@ function goOrder() {
   min-width: 0;
 }
 .order-item__name {
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .order-item__spec {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-secondary);
 }
 .order-item__price {
-  font-size: 14px;
+  font-size: 28rpx;
   font-weight: 700;
   color: var(--color-primary);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .order-item__qty {
   color: var(--color-text-secondary);
-  font-size: 14px;
+  font-size: 28rpx;
 }
 .fee {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
-  padding: 6px 0;
+  font-size: 28rpx;
+  padding: 12rpx 0;
 }
 .fee--total {
-  border-top: 1px solid var(--color-border-light);
-  margin-top: 6px;
-  padding-top: 12px;
+  border-top: 2rpx solid var(--color-border-light);
+  margin-top: 12rpx;
+  padding-top: 24rpx;
   font-weight: 700;
 }
 .fee--total .num {
   color: var(--color-primary);
-  font-size: 18px;
+  font-size: 36rpx;
 }
 .info-row {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
-  padding: 6px 0;
+  padding: 12rpx 0;
 }
 .actions {
   display: flex;
-  gap: 12px;
-  margin-top: 4px;
+  gap: 24rpx;
+  margin-top: 8rpx;
 }
 .act {
   flex: 1;
   text-align: center;
-  padding: 12px 0;
-  border: 1px solid var(--color-border);
+  padding: 24rpx 0;
+  border: 2rpx solid var(--color-border);
   border-radius: var(--radius-button);
-  font-size: 14px;
+  font-size: 28rpx;
   color: var(--color-text-primary);
 }
 .act--primary {
@@ -461,7 +461,7 @@ function goOrder() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 32rpx;
 }
 .empty__text {
   color: var(--color-text-secondary);
@@ -469,8 +469,8 @@ function goOrder() {
 .empty__btn {
   background: var(--gradient-primary-btn);
   color: #fff;
-  padding: 10px 28px;
+  padding: 20rpx 56rpx;
   border-radius: var(--radius-pill);
-  font-size: 15px;
+  font-size: 30rpx;
 }
 </style>

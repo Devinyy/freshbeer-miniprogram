@@ -78,7 +78,7 @@
       </view>
     </view>
 
-    <view style="height: 96px"></view>
+    <view style="height: 192rpx"></view>
     <fb-compliance-bar />
   </view>
 </template>
@@ -178,85 +178,85 @@ function onMenu(m) {
 }
 .header {
   background: linear-gradient(165deg, #4a2f1c 0%, #2c1810 100%);
-  padding: calc(env(safe-area-inset-top) + 20px) 16px 20px;
+  padding: calc(env(safe-area-inset-top) + 40rpx) 32rpx 40rpx;
 }
 .header__user {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 24rpx;
 }
 .header__avatar {
-  width: 56px;
-  height: 56px;
+  width: 112rpx;
+  height: 112rpx;
   border-radius: 50%;
   background: rgba(245, 166, 35, 0.2);
-  border: 2px solid var(--color-member-gold);
+  border: 4rpx solid var(--color-member-gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 60rpx;
 }
 .header__info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12rpx;
 }
 .header__name {
-  font-size: 20px;
+  font-size: 40rpx;
   font-weight: 700;
   color: #fff;
 }
 .header__vip {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16rpx;
 }
 .header__badge {
-  font-size: 11px;
+  font-size: 22rpx;
   color: var(--color-secondary-dark);
   background: var(--color-member-gold);
-  padding: 1px 8px;
+  padding: 2rpx 16rpx;
   border-radius: var(--radius-tag);
   font-weight: 600;
 }
 .header__lvl {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-member-gold);
 }
 .header__vip--off {
-  font-size: 12px;
+  font-size: 24rpx;
   color: rgba(255, 255, 255, 0.85);
 }
 .phone-login {
-  margin: 2px 0 0;
+  margin: 4rpx 0 0;
   padding: 0;
-  line-height: 20px;
-  font-size: 11px;
+  line-height: 40rpx;
+  font-size: 22rpx;
   color: var(--color-member-gold);
   background: transparent;
   border: 0;
 }
 .phone-login::after { border: 0; }
 .header__setting {
-  font-size: 22px;
+  font-size: 44rpx;
   color: rgba(255, 255, 255, 0.9);
 }
 .scard {
   position: relative;
-  margin-top: 18px;
+  margin-top: 36rpx;
   border-radius: var(--radius-card);
   background: linear-gradient(135deg, #f5d98f 0%, #d4a843 55%, #b8862b 100%);
-  padding: 16px;
+  padding: 32rpx;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(184, 134, 43, 0.35);
+  box-shadow: 0 12rpx 40rpx rgba(184, 134, 43, 0.35);
 }
 .scard__glow {
   position: absolute;
-  top: -40px;
-  right: -30px;
-  width: 120px;
-  height: 120px;
+  top: -80rpx;
+  right: -60rpx;
+  width: 240rpx;
+  height: 240rpx;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.25);
 }
@@ -266,52 +266,52 @@ function onMenu(m) {
   align-items: center;
 }
 .scard__brand {
-  font-size: 13px;
+  font-size: 26rpx;
   color: #5a3b15;
   font-weight: 600;
 }
 .scard__gold {
-  font-size: 12px;
+  font-size: 24rpx;
   color: #5a3b15;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 2rpx;
 }
 .scard__balance {
-  margin-top: 14px;
+  margin-top: 28rpx;
   display: flex;
   flex-direction: column;
 }
 .scard__label {
-  font-size: 11px;
+  font-size: 22rpx;
   color: #6b4a1a;
 }
 .scard__num {
-  font-size: 30px;
+  font-size: 60rpx;
   font-weight: 700;
   color: #3d2817;
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .scard__foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 14px;
+  margin-top: 28rpx;
 }
 .scard__tip {
-  font-size: 11px;
+  font-size: 22rpx;
   color: #6b4a1a;
 }
 .scard__btn {
   background: var(--color-secondary-dark);
   color: var(--color-member-gold);
-  font-size: 13px;
+  font-size: 26rpx;
   font-weight: 600;
-  padding: 6px 16px;
+  padding: 12rpx 32rpx;
   border-radius: var(--radius-pill);
 }
 .header__stats {
   display: flex;
-  margin-top: 18px;
+  margin-top: 36rpx;
 }
 .stat {
   flex: 1;
@@ -320,30 +320,30 @@ function onMenu(m) {
   align-items: center;
 }
 .stat__num {
-  font-size: 18px;
+  font-size: 36rpx;
   font-weight: 700;
   color: #fff;
 }
 .stat__label {
-  font-size: 12px;
+  font-size: 24rpx;
   color: rgba(255, 255, 255, 0.75);
-  margin-top: 2px;
+  margin-top: 4rpx;
 }
 .card {
   background: var(--color-surface);
   border-radius: var(--radius-card);
-  margin: 12px 16px;
-  padding: 16px;
+  margin: 24rpx 32rpx;
+  padding: 32rpx;
   box-shadow: var(--shadow-card);
 }
 .orders__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 32rpx;
 }
 .orders__all {
-  font-size: 13px;
+  font-size: 26rpx;
   color: var(--color-text-secondary);
 }
 .orders__grid {
@@ -354,43 +354,43 @@ function onMenu(m) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 12rpx;
 }
 .o__ico {
-  font-size: 26px;
+  font-size: 52rpx;
 }
 .o__label {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-text-primary);
 }
 .menu__item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--color-border-light);
+  gap: 24rpx;
+  padding: 28rpx 0;
+  border-bottom: 2rpx solid var(--color-border-light);
 }
 .menu__item:last-child {
   border-bottom: none;
 }
 .menu__ico {
-  font-size: 20px;
+  font-size: 40rpx;
 }
 .menu__label {
   flex: 1;
-  font-size: 15px;
+  font-size: 30rpx;
   color: var(--color-text-primary);
 }
 .menu__state {
-  font-size: 12px;
+  font-size: 24rpx;
   color: var(--color-warning);
-  margin-right: 6px;
+  margin-right: 12rpx;
 }
 .menu__state.on {
   color: var(--color-success);
 }
 .menu__arrow {
   color: var(--color-text-tertiary);
-  font-size: 18px;
+  font-size: 36rpx;
 }
 </style>

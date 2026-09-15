@@ -19,6 +19,6 @@ defineProps({
 }
 .sym {
   font-size: 0.72em;
-  margin-right: 1px;
+  margin-right: 2rpx;
 }
 </style>
