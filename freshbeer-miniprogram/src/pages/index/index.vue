@@ -2,7 +2,7 @@
   <view class="page">
     <!-- 自定义导航栏 -->
     <view class="nav" :style="{ paddingTop: $statusBarHeight + 'px' }">
-      <view class="nav__bar nav__bar--top" :style="{ paddingRight: capsuleRight + 'px' }">
+      <view class="nav__bar nav__bar--top" :style="{ height: navTopHeight + 'px', paddingRight: capsuleRight + 'px' }">
         <view class="nav__addr" @tap="goAddress">
           <fb-icon name="location" :size="16" color="#F5A623" />
           <text class="nav__addr-text ellipsis-1">{{ addressText }}</text>
@@ -76,6 +76,10 @@ const addressText = ref('上海市徐汇区·阳光公寓')
 const menuButton = uni.getMenuButtonBoundingClientRect ? uni.getMenuButtonBoundingClientRect() : null
 const windowInfo = uni.getWindowInfo ? uni.getWindowInfo() : uni.getSystemInfoSync()
 const capsuleRight = menuButton ? Math.max(12, windowInfo.windowWidth - menuButton.left + 8) : 96
+// 令定位行的垂直中心与微信胶囊中心对齐，并让第二行搜索框落在胶囊下方。
+const navTopHeight = menuButton
+  ? Math.max(40, (menuButton.top - (windowInfo.statusBarHeight || 0)) * 2 + menuButton.height)
+  : 44
 
 onMounted(async () => {
   try {
@@ -174,8 +178,7 @@ function goAddress() {
   padding: 0 12px;
   gap: 8px;
 }
-.nav__bar--top { height: 32px; }
-.nav__bar--search { height: 44px; padding-top: 0; }
+.nav__bar--search { height: 44px; padding-top: 0; margin-top: 8px; }
 .nav__addr {
   display: flex;
   align-items: center;
