@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 配送追踪页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 配送追踪</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-info: #2196F3;
+    --color-info-light: #E3F2FD;
+    --color-cold-chain: #00BFA5;
+    --color-cold-chain-bg: #E0F7F4;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-floating: 0 4px 16px rgba(44, 24, 16, 0.12);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --radius-circle: 999px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: #E8DDD0;
+  }
+
+  /* 全屏地图 */
+  .map-full {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #E8DDD0 0%, #F0E8DC 50%, #FAF3EB 100%);
+    overflow: hidden;
+  }
+  /* 地图路网 */
+  .map-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(0deg, transparent 48%, rgba(176,164,144,0.12) 49%, rgba(176,164,144,0.12) 51%, transparent 52%),
+      linear-gradient(90deg, transparent 48%, rgba(176,164,144,0.12) 49%, rgba(176,164,144,0.12) 51%, transparent 52%);
+    background-size: 45px 45px;
+  }
+  /* 道路 */
+  .road {
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+  }
+  .road-h { height: 4px; width: 100%; }
+  .road-v { width: 4px; height: 100%; }
+  .road-1 { top: 180px; }
+  .road-2 { top: 400px; height: 3px; background: rgba(255,255,255,0.4); }
+  .road-3 { left: 100px; }
+  .road-4 { right: 80px; width: 3px; background: rgba(255,255,255,0.4); }
+
+  /* 配送路线 */
+  .route-line {
+    position: absolute;
+    top: 280px; left: 80px;
+    width: 2px; height: 200px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    z-index: 2;
+  }
+  .route-line::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 160px; height: 2px;
+    background: var(--color-primary);
+  }
+
+  /* 起点标记（商家） */
+  .pin-shop {
+    position: absolute;
+    top: 270px; left: 75px;
+    z-index: 3;
+  }
+  .pin-shop__icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: 3px solid #FFF;
+    box-shadow: 0 2px 8px rgba(245,166,35,0.4);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pin-shop__label {
+    font-size: 10px; color: var(--color-text-primary);
+    background: rgba(255,255,255,0.9);
+    padding: 1px 6px; border-radius: 4px;
+    margin-top: 2px; white-space: nowrap;
+    text-align: center;
+  }
+
+  /* 骑手位置 */
+  .pin-rider {
+    position: absolute;
+    top: 380px; left: 68px;
+    z-index: 4;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .pin-rider__icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--color-info);
+    border: 3px solid #FFF;
+    box-shadow: 0 4px 12px rgba(33,150,243,0.4);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pin-rider__pulse {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--color-info);
+    animation: pulseRing 2s ease-out infinite;
+  }
+  @keyframes pulseRing {
+    0% { width: 40px; height: 40px; opacity: 0.6; }
+    100% { width: 80px; height: 80px; opacity: 0; }
+  }
+
+  /* 终点标记（收货地址） */
+  .pin-home {
+    position: absolute;
+    top: 470px; left: 230px;
+    z-index: 3;
+  }
+  .pin-home__icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--color-success);
+    border: 3px solid #FFF;
+    box-shadow: 0 2px 8px rgba(76,175,80,0.4);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pin-home__label {
+    font-size: 10px; color: var(--color-text-primary);
+    background: rgba(255,255,255,0.9);
+    padding: 1px 6px; border-radius: 4px;
+    margin-top: 2px; white-space: nowrap;
+    text-align: center;
+  }
+
+  /* 顶部导航（半透明） */
+  .nav-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 44px;
+    display: flex; align-items: center;
+    padding: 0 var(--space-md);
+    z-index: 10;
+  }
+  .nav-bar__back {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-text-primary);
+    font-size: 20px; line-height: 1;
+    box-shadow: 0 2px 8px rgba(44,24,16,0.1);
+  }
+
+  /* ETA 浮层 */
+  .eta-card {
+    position: absolute;
+    top: 56px; left: var(--space-md); right: var(--space-md);
+    background: rgba(255,255,255,0.95);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-floating);
+    z-index: 10;
+    display: flex; align-items: center; gap: var(--space-md);
+  }
+  .eta-card__icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--color-cold-chain-bg);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .eta-card__info { flex: 1; }
+  .eta-card__title {
+    font-size: 13px; color: var(--color-text-secondary);
+  }
+  .eta-card__time {
+    font-family: var(--font-number);
+    font-size: 22px; font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.2;
+  }
+  .eta-card__time::after { content: ' 分钟'; font-size: 13px; }
+  .eta-card__desc {
+    font-size: 11px; color: var(--color-cold-chain);
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  /* 骑手信息卡 */
+  .rider-panel {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--color-surface);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 16px rgba(44,24,16,0.1);
+    padding: var(--space-md);
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+    z-index: 10;
+  }
+
+  /* 拖拽指示器 */
+  .panel-handle {
+    width: 36px; height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    margin: 0 auto var(--space-sm);
+  }
+
+  .rider-info-row {
+    display: flex; align-items: center; gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .rider-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--color-primary-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  .rider-detail { flex: 1; }
+  .rider-name-row {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 4px;
+  }
+  .rider-name { font-size: 16px; font-weight: 700; color: var(--color-text-primary); }
+  .rider-plate {
+    font-size: 10px; padding: 1px 6px; border-radius: var(--radius-tag);
+    background: var(--color-surface-alt); color: var(--color-text-secondary);
+    font-family: var(--font-number);
+  }
+  .rider-status {
+    font-size: 12px; color: var(--color-info);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .rider-actions { display: flex; gap: var(--space-sm); }
+  .rider-action-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .rider-action-btn--call {
+    background: var(--color-success); border: none;
+  }
+
+  /* 配送进度条 */
+  .progress-bar {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: var(--space-md);
+  }
+  .progress-step-mini {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .progress-step-mini__dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--color-surface); border: 2px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--color-text-tertiary);
+  }
+  .progress-step-mini--done .progress-step-mini__dot {
+    background: var(--color-success); border-color: var(--color-success); color: #FFF;
+  }
+  .progress-step-mini--current .progress-step-mini__dot {
+    background: var(--color-primary); border-color: var(--color-primary); color: #FFF;
+  }
+  .progress-step-mini__label { font-size: 10px; color: var(--color-text-secondary); }
+  .progress-step-mini--done .progress-step-mini__label,
+  .progress-step-mini--current .progress-step-mini__label {
+    color: var(--color-text-primary); font-weight: 600;
+  }
+  .progress-line {
+    flex: 0 0 20px; height: 2px; background: var(--color-border);
+    margin-bottom: 16px;
+  }
+  .progress-line--done { background: var(--color-success); }
+
+  /* 冷链提示 */
+  .cold-chain-tip {
+    background: var(--color-cold-chain-bg);
+    border-radius: 8px;
+    padding: var(--space-sm) var(--space-md);
+    display: flex; align-items: center; gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .cold-chain-tip__icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--color-surface);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cold-chain-tip__text { flex: 1; }
+  .cold-chain-tip__title { font-size: 13px; font-weight: 600; color: var(--color-cold-chain); }
+  .cold-chain-tip__desc { font-size: 11px; color: var(--color-text-secondary); }
+
+  /* 合规警示 */
+  .compliance-warning {
+    text-align: center; font-size: 11px; color: var(--color-text-tertiary);
+    line-height: 1.6;
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- 全屏地图 -->
+  <div class="map-full">
+    <div class="map-grid"></div>
+    <div class="road road-h road-1"></div>
+    <div class="road road-h road-2"></div>
+    <div class="road road-v road-3"></div>
+    <div class="road road-v road-4"></div>
+
+    <!-- 配送路线 -->
+    <div class="route-line"></div>
+
+    <!-- 商家位置 -->
+    <div class="pin-shop">
+      <div class="pin-shop__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 6H13L12 13H4L3 6Z" stroke="#FFF" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 6V4C6 3.45 6.45 3 7 3H9C9.55 3 10 3.45 10 4V6" stroke="#FFF" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="pin-shop__label">望京前置仓</div>
+    </div>
+
+    <!-- 骑手位置 -->
+    <div class="pin-rider">
+      <div class="pin-rider__pulse"></div>
+      <div class="pin-rider__icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C8.24 2 6 4.24 6 7C6 12 11 19 11 19C11 19 16 12 16 7C16 4.24 13.76 2 11 2Z" fill="#FFF"/><circle cx="11" cy="7" r="2.5" fill="#2196F3"/></svg>
+      </div>
+    </div>
+
+    <!-- 收货地址 -->
+    <div class="pin-home">
+      <div class="pin-home__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 7L8 3L13 7V13H3V7Z" stroke="#FFF" stroke-width="1.5" stroke-linejoin="round"/><rect x="6" y="9" width="4" height="4" stroke="#FFF" stroke-width="1.2"/></svg>
+      </div>
+      <div class="pin-home__label">望京西园三区</div>
+    </div>
+  </div>
+
+  <!-- 顶部导航 -->
+  <div class="nav-bar">
+    <div class="nav-bar__back">‹</div>
+  </div>
+
+  <!-- ETA 卡片 -->
+  <div class="eta-card">
+    <div class="eta-card__icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C7.03 2 3 6.03 3 11C3 17.5 12 22 12 22C12 22 21 17.5 21 11C21 6.03 16.97 2 12 2Z" fill="#00BFA5"/><circle cx="12" cy="11" r="3" fill="#FFF"/></svg>
+    </div>
+    <div class="eta-card__info">
+      <div class="eta-card__title">预计送达时间</div>
+      <div class="eta-card__time">8</div>
+      <div class="eta-card__desc">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1V9M1 5H9" stroke="#00BFA5" stroke-width="1" stroke-linecap="round"/></svg>
+        冷链配送中 · 骑手距您 800m
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部骑手面板 -->
+  <div class="rider-panel">
+    <div class="panel-handle"></div>
+
+    <!-- 骑手信息 -->
+    <div class="rider-info-row">
+      <div class="rider-avatar">王</div>
+      <div class="rider-detail">
+        <div class="rider-name-row">
+          <span class="rider-name">王师傅</span>
+          <span class="rider-plate">京A·8899</span>
+        </div>
+        <div class="rider-status">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#2196F3"/><path d="M3 6L5.5 8.5L9 4" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          正在配送 · 已取货6分钟
+        </div>
+      </div>
+      <div class="rider-actions">
+        <button class="rider-action-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5C3 5 5 3 7 5C8 6 7.5 7.5 6.5 8.5C5.5 9.5 7 12 9 14C11 16 13 17 14 16C15 15 16.5 14.5 17.5 15.5C19.5 17.5 17 19 17 19" stroke="#8B7D6B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="rider-action-btn rider-action-btn--call">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3C5 3 7 3 8 5C8.5 6 8 7 7 8C6 9 7 11 9 13C11 15 13 16 14 15C15 14 16 13.5 17 14C19 15 19 17 19 17C19 17 18 19 16 19C10 19 1 10 1 4C1 2 3 1 3 1L5 3Z" fill="#FFF"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="progress-bar">
+      <div class="progress-step-mini progress-step-mini--done">
+        <div class="progress-step-mini__dot">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6L5 8L9 4" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="progress-step-mini__label">已下单</span>
+      </div>
+      <div class="progress-line progress-line--done"></div>
+      <div class="progress-step-mini progress-step-mini--done">
+        <div class="progress-step-mini__dot">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6L5 8L9 4" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="progress-step-mini__label">已备货</span>
+      </div>
+      <div class="progress-line progress-line--done"></div>
+      <div class="progress-step-mini progress-step-mini--current">
+        <div class="progress-step-mini__dot">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6L5 3L8 6L11 2" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="progress-step-mini__label">配送中</span>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step-mini">
+        <div class="progress-step-mini__dot">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L11 10H1L6 1Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="progress-step-mini__label">已送达</span>
+      </div>
+    </div>
+
+    <!-- 冷链提示 -->
+    <div class="cold-chain-tip">
+      <div class="cold-chain-tip__icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1V15M1 8H15M3 3L13 13M13 3L3 13" stroke="#00BFA5" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="cold-chain-tip__text">
+        <div class="cold-chain-tip__title">鲜啤冷链配送中</div>
+        <div class="cold-chain-tip__desc">保温箱+冰袋 · 签收时请确认酒品温度</div>
+      </div>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+</body>
+</html>

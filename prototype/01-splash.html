@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 启动页/品牌闪屏 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 启动页</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-secondary-dark: #2C1810;
+    --color-secondary-cream: #FFF8F0;
+    --color-beer-amber: #E8A317;
+    --color-beer-dark: #3D2817;
+    --gradient-beer-glass: linear-gradient(180deg, #FFF8F0 0%, #E8A317 30%, #3D2817 100%);
+    --font-heading: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans CN", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-heading);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    background: var(--gradient-beer-glass);
+  }
+
+  /* 装饰光晕 */
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+  }
+  .glow-1 {
+    width: 200px; height: 200px;
+    background: #F5A623;
+    top: -40px; right: -60px;
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  .glow-2 {
+    width: 180px; height: 180px;
+    background: #E8A317;
+    bottom: 100px; left: -50px;
+    animation: glowPulse 3s ease-in-out infinite 1s;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.1); }
+  }
+
+  /* 主容器 */
+  .splash-container {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Logo 图标 — 啤酒杯 */
+  .logo-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 24px;
+    animation: logoBounce 0.8s ease-out 0.2s both;
+  }
+
+  @keyframes logoBounce {
+    0% { opacity: 0; transform: scale(0.5) translateY(-30px); }
+    60% { transform: scale(1.1) translateY(0); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* 品牌名 */
+  .brand-name {
+    font-size: 40px;
+    font-weight: 900;
+    color: #FFF8F0;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 12px rgba(44, 24, 16, 0.3);
+    margin-bottom: 8px;
+    animation: fadeIn 0.6s ease-out 0.5s both;
+  }
+
+  /* 分隔线 */
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: rgba(255, 248, 240, 0.4);
+    margin-bottom: 12px;
+    animation: fadeIn 0.6s ease-out 0.6s both;
+  }
+
+  /* Slogan */
+  .slogan {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255, 248, 240, 0.8);
+    letter-spacing: 2px;
+    animation: fadeIn 0.6s ease-out 0.7s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* 底部合规警示 */
+  .compliance {
+    position: absolute;
+    bottom: 60px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255, 248, 240, 0.5);
+    line-height: 1.6;
+    animation: fadeIn 0.6s ease-out 1s both;
+  }
+
+  /* 泡沫粒子装饰 */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 248, 240, 0.3);
+    animation: bubbleFloat 4s ease-in-out infinite;
+  }
+  .bubble-1 { width: 8px; height: 8px; top: 200px; left: 80px; animation-delay: 0s; }
+  .bubble-2 { width: 6px; height: 6px; top: 300px; right: 60px; animation-delay: 0.5s; }
+  .bubble-3 { width: 10px; height: 10px; top: 500px; left: 100px; animation-delay: 1s; }
+  .bubble-4 { width: 5px; height: 5px; top: 400px; right: 100px; animation-delay: 1.5s; }
+  .bubble-5 { width: 7px; height: 7px; bottom: 200px; left: 50%; animation-delay: 2s; }
+
+  @keyframes bubbleFloat {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(-20px); opacity: 0.6; }
+  }
+
+  /* 跳转提示 */
+  .loading-dots {
+    position: absolute;
+    bottom: 120px;
+    display: flex;
+    gap: 6px;
+    animation: fadeIn 0.6s ease-out 1.2s both;
+  }
+  .loading-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 248, 240, 0.5);
+    animation: dotPulse 1.4s ease-in-out infinite;
+  }
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- 背景光晕装饰 -->
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- 泡沫粒子 -->
+  <div class="bubble bubble-1"></div>
+  <div class="bubble bubble-2"></div>
+  <div class="bubble bubble-3"></div>
+  <div class="bubble bubble-4"></div>
+  <div class="bubble bubble-5"></div>
+
+  <!-- 主内容 -->
+  <div class="splash-container">
+    <!-- 啤酒杯 Logo -->
+    <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 泡沫 -->
+      <ellipse cx="38" cy="20" rx="10" ry="6" fill="#FFF8F0" opacity="0.95"/>
+      <ellipse cx="52" cy="17" rx="12" ry="7" fill="#FFF8F0" opacity="0.95"/>
+      <ellipse cx="64" cy="22" rx="9" ry="5" fill="#FFF8F0" opacity="0.95"/>
+      <circle cx="45" cy="14" r="4" fill="#FFF8F0" opacity="0.9"/>
+      <circle cx="58" cy="12" r="3" fill="#FFF8F0" opacity="0.8"/>
+      <!-- 杯身 -->
+      <path d="M28 28 L72 28 L68 78 Q68 82 64 82 L36 82 Q32 82 32 78 Z" fill="#F5A623"/>
+      <!-- 杯身高光 -->
+      <path d="M34 32 L38 32 L36 76 L34 76 Z" fill="#FFF8F0" opacity="0.25"/>
+      <!-- 杯中啤酒液体 -->
+      <path d="M30 34 L70 34 L67 76 Q67 79 64 79 L36 79 Q33 79 33 76 Z" fill="#E8A317" opacity="0.8"/>
+      <!-- 杯把手 -->
+      <path d="M72 40 Q84 42 84 54 Q84 66 72 66" stroke="#F5A623" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- 送达箭头装饰 -->
+      <path d="M44 52 L52 52 M49 49 L52 52 L49 55" stroke="#FFF8F0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    </svg>
+
+    <div class="brand-name">鲜啤到</div>
+    <div class="divider"></div>
+    <div class="slogan">好啤酒，新鲜到</div>
+  </div>
+
+  <!-- 加载点 -->
+  <div class="loading-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- 合规警示 -->
+  <div class="compliance">
+    未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾
+  </div>
+</body>
+</html>

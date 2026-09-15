@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 规格选择弹层 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 规格选择</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-storage-exclusive: #F5A623;
+    --color-storage-exclusive-bg: #FFF0D6;
+    --color-cold-chain: #00BFA5;
+    --color-cold-chain-bg: #E0F7F4;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-overlay: 0 8px 32px rgba(44, 24, 16, 0.16);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-heading: "PingFang SC", "HarmonyOS Sans SC", sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-image: 8px;
+    --radius-pill: 24px;
+    --radius-circle: 999px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: rgba(44, 24, 16, 0.5);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 模糊背景 - 模拟底层页面 */
+  .bg-blur {
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg);
+    filter: blur(8px);
+    opacity: 0.3;
+  }
+  /* 模拟底层商品列表 */
+  .bg-mock {
+    position: absolute;
+    top: 100px;
+    left: 16px;
+    right: 16px;
+    height: 80px;
+    background: var(--color-surface);
+    border-radius: var(--radius-image);
+    opacity: 0.15;
+  }
+  .bg-mock:nth-child(2) { top: 200px; }
+
+  /* 遮罩层 */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 400;
+  }
+
+  /* 底部弹层 */
+  .bottom-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border-radius: 16px 16px 0 0;
+    box-shadow: var(--shadow-overlay);
+    z-index: 401;
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    animation: slideUp 0.3s ease-out;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  /* 弹层拖拽指示器 */
+  .sheet-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    margin: 8px auto 0;
+  }
+
+  /* 商品头部信息 */
+  .sheet-header {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    position: relative;
+  }
+  .sheet-header__image {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-image);
+    background: linear-gradient(135deg, #E8A317, #3D2817);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255, 248, 240, 0.5);
+    margin-top: -30px;
+    box-shadow: 0 4px 12px rgba(44, 24, 16, 0.15);
+    border: 3px solid var(--color-surface);
+  }
+  .sheet-header__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sheet-header__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .sheet-header__sub {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+  .sheet-header__price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .sheet-header__storage-price {
+    font-family: var(--font-number);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .sheet-header__storage-price::before { content: '¥'; font-size: 13px; }
+  .sheet-header__original-price {
+    font-family: var(--font-number);
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+    text-decoration: line-through;
+  }
+  .sheet-header__close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-surface-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* 规格分组 */
+  .spec-group {
+    padding: 0 var(--space-md) var(--space-sm);
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--space-md);
+  }
+  .spec-group__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spec-group__title-hint {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+  }
+  .spec-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .spec-option {
+    padding: 8px 16px;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .spec-option--active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  .spec-option__price {
+    font-family: var(--font-number);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+  .spec-option--active .spec-option__price {
+    color: var(--color-primary);
+  }
+  .spec-option--disabled {
+    opacity: 0.4;
+    text-decoration: line-through;
+    cursor: not-allowed;
+  }
+
+  /* 数量选择 */
+  .qty-section {
+    padding: var(--space-md);
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .qty-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  .qty-hint {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .qty-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .qty-btn--minus:active { background: var(--color-surface-alt); }
+  .qty-btn--plus {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+  .qty-btn--plus:active { opacity: 0.8; transform: scale(0.92); }
+  .qty-num {
+    font-family: var(--font-number);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    min-width: 30px;
+    text-align: center;
+  }
+
+  /* 底部按钮 */
+  .sheet-footer {
+    padding: var(--space-md);
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--color-border-light);
+  }
+  .btn-confirm {
+    width: 100%;
+    height: 48px;
+    background: var(--gradient-primary-btn);
+    color: var(--color-text-inverse);
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-primary-glow);
+    cursor: pointer;
+  }
+  .btn-confirm:active { opacity: 0.85; transform: scale(0.98); }
+
+  /* 储值专享提示 */
+  .storage-hint {
+    background: var(--color-storage-exclusive-bg);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 0 var(--space-md) var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--color-storage-exclusive);
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- 模糊背景 -->
+  <div class="bg-blur"></div>
+  <div class="bg-mock"></div>
+  <div class="bg-mock"></div>
+
+  <!-- 遮罩 -->
+  <div class="overlay"></div>
+
+  <!-- 底部弹层 -->
+  <div class="bottom-sheet">
+    <div class="sheet-handle"></div>
+
+    <!-- 商品头部 -->
+    <div class="sheet-header">
+      <div class="sheet-header__image">IPA</div>
+      <div class="sheet-header__info">
+        <div class="sheet-header__title">鹅岛 IPA 精酿啤酒</div>
+        <div class="sheet-header__sub">美国 · 6.5%vol · 已选：330ml单瓶</div>
+        <div class="sheet-header__price">
+          <span class="sheet-header__storage-price">55.10</span>
+          <span class="sheet-header__original-price">¥58.0</span>
+        </div>
+      </div>
+      <div class="sheet-header__close">✕</div>
+    </div>
+
+    <!-- 储值提示 -->
+    <div class="storage-hint">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="#F5A623" stroke-width="1.2"/><circle cx="7" cy="7" r="1.5" fill="#F5A623"/></svg>
+      储值卡支付享专享价 · 立省 ¥2.90
+    </div>
+
+    <!-- 容量规格 -->
+    <div class="spec-group">
+      <div class="spec-group__title">
+        容量
+        <span class="spec-group__title-hint">请选择容量</span>
+      </div>
+      <div class="spec-options">
+        <div class="spec-option spec-option--active">
+          330ml 单瓶
+          <div class="spec-option__price">¥55.10</div>
+        </div>
+        <div class="spec-option">
+          330ml × 6瓶
+          <div class="spec-option__price">¥318.00</div>
+        </div>
+        <div class="spec-option spec-option--disabled">
+          500ml 生啤桶
+          <div class="spec-option__price">已售罄</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 包装规格 -->
+    <div class="spec-group">
+      <div class="spec-group__title">
+        包装
+        <span class="spec-group__title-hint">请选择包装</span>
+      </div>
+      <div class="spec-options">
+        <div class="spec-option spec-option--active">玻璃瓶</div>
+        <div class="spec-option">易拉罐</div>
+      </div>
+    </div>
+
+    <!-- 温度 -->
+    <div class="spec-group">
+      <div class="spec-group__title">
+        配送温度
+        <span class="spec-group__title-hint">鲜啤冷链保障</span>
+      </div>
+      <div class="spec-options">
+        <div class="spec-option spec-option--active">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="display:inline;vertical-align:middle;margin-right:3px;"><path d="M6 1V11M1 6H11M3 3L9 9M9 3L3 9" stroke="#00BFA5" stroke-width="1" stroke-linecap="round"/></svg>
+          冰鲜冷藏 4°C
+        </div>
+        <div class="spec-option">常温</div>
+      </div>
+    </div>
+
+    <!-- 数量 -->
+    <div class="qty-section">
+      <div>
+        <div class="qty-label">购买数量</div>
+        <div class="qty-hint">库存充足 · 限购 24 瓶</div>
+      </div>
+      <div class="qty-control">
+        <button class="qty-btn qty-btn--minus">−</button>
+        <span class="qty-num">2</span>
+        <button class="qty-btn qty-btn--plus">+</button>
+      </div>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div class="sheet-footer">
+      <button class="btn-confirm">加入购物车 · ¥110.20</button>
+    </div>
+  </div>
+</body>
+</html>

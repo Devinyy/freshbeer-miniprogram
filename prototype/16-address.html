@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 地址管理页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 地址管理</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-success-light: #E8F5E9;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-bar {
+    height: 44px; background: var(--color-surface);
+    display: flex; align-items: center;
+    padding: 0 var(--space-md); position: relative;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .nav-bar__back { font-size: 22px; color: var(--color-text-primary); line-height: 1; }
+  .nav-bar__title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: 17px; font-weight: 600; color: var(--color-text-primary);
+  }
+
+  /* 地址列表 */
+  .address-list {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: 100px;
+  }
+
+  .address-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+  }
+  .address-card--default {
+    border: 1.5px solid var(--color-primary);
+  }
+  .address-card__header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 6px;
+  }
+  .address-card__name { font-size: 16px; font-weight: 700; color: var(--color-text-primary); }
+  .address-card__phone {
+    font-size: 14px; color: var(--color-text-secondary);
+    font-family: var(--font-number);
+  }
+  .address-card__tag {
+    font-size: 10px; padding: 1px 6px; border-radius: var(--radius-tag);
+    font-weight: 600;
+  }
+  .address-card__tag--default {
+    background: var(--color-primary-light); color: var(--color-primary);
+  }
+  .address-card__tag--home {
+    background: #E3F2FD; color: #2196F3;
+  }
+  .address-card__tag--company {
+    background: var(--color-success-light); color: var(--color-success);
+  }
+  .address-card__detail {
+    font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;
+    margin-bottom: var(--space-sm);
+  }
+  .address-card__actions {
+    display: flex; align-items: center; gap: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border-light);
+  }
+  .address-action {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; color: var(--color-text-secondary);
+    cursor: pointer;
+  }
+  .address-action--default {
+    color: var(--color-primary); font-weight: 600;
+  }
+  .address-action--default .radio {
+    background: var(--color-primary); border-color: var(--color-primary);
+  }
+  .radio {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .address-action--edit, .address-action--delete {
+    margin-left: auto;
+  }
+  .address-action--delete { color: var(--color-text-tertiary); }
+
+  /* 新增地址按钮 */
+  .add-btn-fixed {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border-light);
+    box-shadow: 0 -2px 8px rgba(44, 24, 16, 0.04);
+  }
+  .add-btn {
+    width: 100%; height: 48px;
+    background: var(--gradient-primary-btn);
+    color: #FFF;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-size: 16px; font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-primary-glow);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* 合规警示 */
+  .compliance-warning {
+    text-align: center; font-size: 11px; color: var(--color-text-tertiary);
+    padding: var(--space-sm); line-height: 1.6;
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="nav-bar">
+    <span class="nav-bar__back">‹</span>
+    <span class="nav-bar__title">收货地址</span>
+  </div>
+
+  <div class="address-list">
+    <!-- 默认地址 -->
+    <div class="address-card address-card--default">
+      <div class="address-card__header">
+        <span class="address-card__name">张先生</span>
+        <span class="address-card__phone">188****6688</span>
+        <span class="address-card__tag address-card__tag--default">默认</span>
+        <span class="address-card__tag address-card__tag--home">家</span>
+      </div>
+      <div class="address-card__detail">朝阳区望京西园三区 12号楼 3单元 502室</div>
+      <div class="address-card__actions">
+        <div class="address-action address-action--default">
+          <div class="radio">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          默认地址
+        </div>
+        <div class="address-action address-action--edit">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L3 9L10 2L12 4L5 11L2 12Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          编辑
+        </div>
+        <div class="address-action address-action--delete">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4H12M5 4V3C5 2.45 5.45 2 6 2H8C8.55 2 9 2.45 9 3V4M4 4L4.5 12C4.5 12.55 5 13 5.5 13H8.5C9 13 9.5 12.55 9.5 12L10 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          删除
+        </div>
+      </div>
+    </div>
+
+    <!-- 公司地址 -->
+    <div class="address-card">
+      <div class="address-card__header">
+        <span class="address-card__name">张先生</span>
+        <span class="address-card__phone">188****6688</span>
+        <span class="address-card__tag address-card__tag--company">公司</span>
+      </div>
+      <div class="address-card__detail">海淀区中关村软件园 二期 西二旗大厦 B座 8层</div>
+      <div class="address-card__actions">
+        <div class="address-action">
+          <div class="radio"></div>
+          设为默认
+        </div>
+        <div class="address-action address-action--edit">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L3 9L10 2L12 4L5 11L2 12Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          编辑
+        </div>
+        <div class="address-action address-action--delete">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4H12M5 4V3C5 2.45 5.45 2 6 2H8C8.55 2 9 2.45 9 3V4M4 4L4.5 12C4.5 12.55 5 13 5.5 13H8.5C9 13 9.5 12.55 9.5 12L10 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          删除
+        </div>
+      </div>
+    </div>
+
+    <!-- 其他地址 -->
+    <div class="address-card">
+      <div class="address-card__header">
+        <span class="address-card__name">张先生</span>
+        <span class="address-card__phone">188****6688</span>
+        <span class="address-card__tag" style="background:var(--color-surface-alt);color:var(--color-text-secondary);">其他</span>
+      </div>
+      <div class="address-card__detail">朝阳区三里屯SOHO 5号楼 1层 临街商铺</div>
+      <div class="address-card__actions">
+        <div class="address-action">
+          <div class="radio"></div>
+          设为默认
+        </div>
+        <div class="address-action address-action--edit">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L3 9L10 2L12 4L5 11L2 12Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          编辑
+        </div>
+        <div class="address-action address-action--delete">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4H12M5 4V3C5 2.45 5.45 2 6 2H8C8.55 2 9 2.45 9 3V4M4 4L4.5 12C4.5 12.55 5 13 5.5 13H8.5C9 13 9.5 12.55 9.5 12L10 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          删除
+        </div>
+      </div>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+
+  <!-- 新增地址按钮 -->
+  <div class="add-btn-fixed">
+    <button class="add-btn">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4V16M4 10H16" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>
+      新增收货地址
+    </button>
+  </div>
+</body>
+</html>

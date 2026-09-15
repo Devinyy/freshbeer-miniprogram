@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 订单详情页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 订单详情</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-info: #2196F3;
+    --color-info-light: #E3F2FD;
+    --color-cold-chain: #00BFA5;
+    --color-cold-chain-bg: #E0F7F4;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-image: 8px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-bar {
+    height: 44px; background: var(--color-surface);
+    display: flex; align-items: center;
+    padding: 0 var(--space-md); position: relative;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .nav-bar__back { font-size: 22px; color: var(--color-text-primary); line-height: 1; }
+  .nav-bar__title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: 17px; font-weight: 600; color: var(--color-text-primary);
+  }
+  .nav-bar__icon {
+    margin-left: auto; color: var(--color-text-primary);
+  }
+
+  .scroll-area {
+    flex: 1; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) var(--space-md) 80px;
+  }
+
+  /* 状态卡片 */
+  .status-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+  }
+  .status-card__header {
+    display: flex; align-items: center; gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .status-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--color-info-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .status-text { flex: 1; }
+  .status-text__title { font-size: 16px; font-weight: 700; color: var(--color-info); }
+  .status-text__desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  /* 时间轴 */
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 9px; top: 4px; bottom: 4px;
+    width: 2px; background: var(--color-border);
+  }
+  .timeline-item {
+    position: relative; padding-bottom: var(--space-md);
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item__dot {
+    position: absolute; left: -20px; top: 2px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--color-surface); border: 2px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .timeline-item--done .timeline-item__dot {
+    background: var(--color-success); border-color: var(--color-success);
+  }
+  .timeline-item--current .timeline-item__dot {
+    background: var(--color-primary); border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px var(--color-primary-light);
+  }
+  .timeline-item__time {
+    font-size: 11px; color: var(--color-text-tertiary);
+    font-family: var(--font-number); margin-bottom: 2px;
+  }
+  .timeline-item__title {
+    font-size: 13px; font-weight: 600; color: var(--color-text-primary);
+  }
+  .timeline-item--current .timeline-item__title { color: var(--color-primary); }
+  .timeline-item__desc {
+    font-size: 11px; color: var(--color-text-secondary); margin-top: 2px;
+  }
+
+  /* 骑手信息 */
+  .rider-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+    display: flex; align-items: center; gap: var(--space-sm);
+  }
+  .rider-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--color-primary-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  .rider-info { flex: 1; }
+  .rider-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+  .rider-desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .rider-call-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--color-success); border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+
+  /* 地图缩略 */
+  .map-mini {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+  }
+  .map-mini__image {
+    height: 120px;
+    background: linear-gradient(135deg, #E8DDD0, #F0E8DC);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .map-mini__grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(0deg, transparent 48%, rgba(176,164,144,0.15) 49%, rgba(176,164,144,0.15) 51%, transparent 52%),
+      linear-gradient(90deg, transparent 48%, rgba(176,164,144,0.15) 49%, rgba(176,164,144,0.15) 51%, transparent 52%);
+    background-size: 30px 30px;
+  }
+  .map-mini__route {
+    position: absolute; width: 2px; height: 80px;
+    background: var(--color-primary); left: 45%; top: 20px;
+    border-radius: 2px;
+  }
+  .map-mini__pin-start {
+    position: absolute; left: 45%; top: 15px;
+    transform: translateX(-50%);
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--color-primary); border: 2px solid #FFF;
+  }
+  .map-mini__pin-end {
+    position: absolute; left: 65%; bottom: 15px;
+    transform: translateX(-50%);
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--color-info); border: 2px solid #FFF;
+  }
+  .map-mini__eta {
+    position: absolute; bottom: 8px; left: 12px;
+    background: rgba(44,24,16,0.7); color: #FFF;
+    font-size: 11px; padding: 4px 10px; border-radius: 8px;
+    font-family: var(--font-number); font-weight: 600;
+  }
+  .map-mini__full-btn {
+    position: absolute; top: 8px; right: 8px;
+    background: var(--color-surface);
+    font-size: 11px; font-weight: 600;
+    color: var(--color-primary);
+    padding: 4px 10px; border-radius: 12px;
+    display: flex; align-items: center; gap: 3px;
+  }
+
+  /* 商品明细 */
+  .section-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+  }
+  .section-card__header {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 14px; font-weight: 700; color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .section-card__body { padding: var(--space-md); }
+
+  .order-item-row {
+    display: flex; gap: var(--space-sm); align-items: center;
+    padding: 6px 0;
+  }
+  .order-item__image {
+    width: 48px; height: 48px; border-radius: var(--radius-image);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600;
+  }
+  .order-item__info { flex: 1; }
+  .order-item__name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); }
+  .order-item__spec { font-size: 11px; color: var(--color-text-secondary); }
+  .order-item__price { text-align: right; }
+  .order-item__price-val { font-family: var(--font-number); font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+  .order-item__qty { font-size: 11px; color: var(--color-text-secondary); font-family: var(--font-number); }
+
+  /* 费用 */
+  .fee-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+  .fee-row__label { color: var(--color-text-secondary); }
+  .fee-row__value { font-family: var(--font-number); color: var(--color-text-primary); font-weight: 600; }
+  .fee-row__value--discount { color: var(--color-danger); }
+  .fee-row__total { border-top: 1px solid var(--color-border-light); margin-top: 4px; padding-top: 8px; }
+  .fee-row__total .fee-row__value { font-size: 18px; color: var(--color-danger); }
+
+  /* 地址 */
+  .address-info {
+    display: flex; gap: var(--space-sm); align-items: flex-start;
+  }
+  .address-info__icon {
+    width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;
+    color: var(--color-primary);
+  }
+  .address-info__content { flex: 1; }
+  .address-info__name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+  .address-info__detail { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; line-height: 1.4; }
+
+  /* 合规 */
+  .compliance-warning {
+    text-align: center; font-size: 11px; color: var(--color-text-tertiary);
+    padding: var(--space-sm); line-height: 1.6;
+  }
+
+  /* 底部按钮 */
+  .bottom-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border-light);
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom));
+    display: flex; gap: var(--space-sm);
+  }
+  .btn-outline {
+    flex: 1; height: 44px;
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary); background: var(--color-surface);
+    border-radius: 22px; font-size: 15px; font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-fill {
+    flex: 1; height: 44px;
+    background: var(--gradient-primary-btn); color: #FFF;
+    border: none; border-radius: 22px;
+    font-size: 15px; font-weight: 600;
+    cursor: pointer; box-shadow: var(--shadow-primary-glow);
+  }
+  .btn-fill:active { opacity: 0.85; }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="nav-bar">
+    <span class="nav-bar__back">‹</span>
+    <span class="nav-bar__title">订单详情</span>
+    <span class="nav-bar__icon">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="5" r="1.5" fill="currentColor"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/><circle cx="10" cy="15" r="1.5" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <div class="scroll-area">
+    <!-- 状态卡片 -->
+    <div class="status-card">
+      <div class="status-card__header">
+        <div class="status-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M2 8L5 5L8 8L12 4L16 8L20 4" stroke="#2196F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5" cy="5" r="2" fill="#2196F3"/><circle cx="12" cy="4" r="2" fill="#2196F3"/><circle cx="16" cy="8" r="2" fill="#2196F3"/><circle cx="20" cy="4" r="2" fill="#2196F3"/></svg>
+        </div>
+        <div class="status-text">
+          <div class="status-text__title">配送中</div>
+          <div class="status-text__desc">骑手正在配送，预计16:06送达</div>
+        </div>
+      </div>
+
+      <!-- 时间轴 -->
+      <div class="timeline">
+        <div class="timeline-item timeline-item--done">
+          <div class="timeline-item__dot">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="timeline-item__time">15:48:30</div>
+          <div class="timeline-item__title">订单已提交</div>
+          <div class="timeline-item__desc">储值卡支付 ¥142.40</div>
+        </div>
+        <div class="timeline-item timeline-item--done">
+          <div class="timeline-item__dot">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="timeline-item__time">15:50:12</div>
+          <div class="timeline-item__title">商家已接单</div>
+          <div class="timeline-item__desc">望京前置仓正在备货</div>
+        </div>
+        <div class="timeline-item timeline-item--done">
+          <div class="timeline-item__dot">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="timeline-item__time">15:55:08</div>
+          <div class="timeline-item__title">骑手已取货</div>
+          <div class="timeline-item__desc">冷链保温箱配送 · 4°C恒温</div>
+        </div>
+        <div class="timeline-item timeline-item--current">
+          <div class="timeline-item__dot">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="2" fill="#FFF"/></svg>
+          </div>
+          <div class="timeline-item__time">16:01:00</div>
+          <div class="timeline-item__title">配送中</div>
+          <div class="timeline-item__desc">骑手距您约800m · 预计8分钟送达</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item__dot"></div>
+          <div class="timeline-item__title" style="color:var(--color-text-tertiary)">待送达</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 骑手 + 地图 -->
+    <div class="rider-card">
+      <div class="rider-avatar">王</div>
+      <div class="rider-info">
+        <div class="rider-name">骑手 王师傅</div>
+        <div class="rider-desc">距您800m · 电话 138****8899</div>
+      </div>
+      <button class="rider-call-btn">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3C5 3 7 3 8 5C8.5 6 8 7 7 8C6 9 7 11 9 13C11 15 13 16 14 15C15 14 16 13.5 17 14C19 15 19 17 19 17C19 17 18 19 16 19C10 19 1 10 1 4C1 2 3 1 3 1L5 3Z" fill="#FFF"/></svg>
+      </button>
+    </div>
+
+    <div class="map-mini">
+      <div class="map-mini__image">
+        <div class="map-mini__grid"></div>
+        <div class="map-mini__route"></div>
+        <div class="map-mini__pin-start"></div>
+        <div class="map-mini__pin-end"></div>
+        <span class="map-mini__eta">预计 8 分钟送达</span>
+        <span class="map-mini__full-btn">查看全图 ›</span>
+      </div>
+    </div>
+
+    <!-- 商品明细 -->
+    <div class="section-card">
+      <div class="section-card__header">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5H13L12 13H4L3 5Z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        商品明细
+      </div>
+      <div class="section-card__body">
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#E8A317;color:#FFF;">IPA</div>
+          <div class="order-item__info">
+            <div class="order-item__name">鹅岛 IPA 精酿啤酒</div>
+            <div class="order-item__spec">330ml · 玻璃瓶 · 冰鲜</div>
+          </div>
+          <div class="order-item__price">
+            <div class="order-item__price-val">¥55.10</div>
+            <div class="order-item__qty">×2</div>
+          </div>
+        </div>
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#F0E0C0;color:#6B4423;">福佳白</div>
+          <div class="order-item__info">
+            <div class="order-item__name">福佳白啤酒</div>
+            <div class="order-item__spec">330ml · 玻璃瓶 · 冰鲜</div>
+          </div>
+          <div class="order-item__price">
+            <div class="order-item__price-val">¥12.80</div>
+            <div class="order-item__qty">×2</div>
+          </div>
+        </div>
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#D4A843;color:#FFF;">花生米</div>
+          <div class="order-item__info">
+            <div class="order-item__name">酒鬼花生米</div>
+            <div class="order-item__spec">100g · 麻辣味</div>
+          </div>
+          <div class="order-item__price">
+            <div class="order-item__price-val">¥12.00</div>
+            <div class="order-item__qty">×1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 费用明细 -->
+    <div class="section-card">
+      <div class="section-card__header">费用明细</div>
+      <div class="section-card__body">
+        <div class="fee-row"><span class="fee-row__label">商品总价</span><span class="fee-row__value">¥158.00</span></div>
+        <div class="fee-row"><span class="fee-row__label">储值专享优惠</span><span class="fee-row__value fee-row__value--discount">-¥5.60</span></div>
+        <div class="fee-row"><span class="fee-row__label">优惠券抵扣</span><span class="fee-row__value fee-row__value--discount">-¥15.00</span></div>
+        <div class="fee-row"><span class="fee-row__label">配送费</span><span class="fee-row__value">¥5.00</span></div>
+        <div class="fee-row fee-row__total"><span class="fee-row__label" style="font-weight:600;color:var(--color-text-primary)">实付金额</span><span class="fee-row__value">¥142.40</span></div>
+      </div>
+    </div>
+
+    <!-- 收货信息 -->
+    <div class="section-card">
+      <div class="section-card__header">收货信息</div>
+      <div class="section-card__body">
+        <div class="address-info">
+          <svg class="address-info__icon" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 16 13 16 8C16 4.69 13.31 2 10 2C6.69 2 4 4.69 4 8C4 13 10 18 10 18Z" fill="#F5A623"/><circle cx="10" cy="8" r="2.5" fill="#FFF8F0"/></svg>
+          <div class="address-info__content">
+            <div class="address-info__name">张先生 · 188****6688</div>
+            <div class="address-info__detail">朝阳区望京西园三区 12号楼 3单元 502室</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--color-border-light);margin-top:12px;padding-top:12px;">
+          <div class="fee-row"><span class="fee-row__label">订单编号</span><span class="fee-row__value" style="font-size:12px;">XB20260721154830</span></div>
+          <div class="fee-row"><span class="fee-row__label">下单时间</span><span class="fee-row__value" style="font-size:12px;">2026-07-21 15:48:30</span></div>
+          <div class="fee-row"><span class="fee-row__label">支付方式</span><span class="fee-row__value" style="font-size:12px;">储值卡支付</span></div>
+          <div class="fee-row"><span class="fee-row__label">备注</span><span class="fee-row__value" style="font-size:12px;">放门口即可</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn-outline">联系商家</button>
+    <button class="btn-fill">再来一单</button>
+  </div>
+</body>
+</html>

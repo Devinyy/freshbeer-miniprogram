@@ -1,0 +1,35 @@
+/* 鲜啤到 · 全局 SCSS 变量（与 App.vue 中 :root CSS 变量保持一致）
+ * 组件内可直接使用 var(--color-primary) 或以下 SCSS 变量做计算。 */
+$color-primary: #f5a623;
+$color-primary-hover: #e8951a;
+$color-primary-active: #d4861a;
+$color-primary-light: #fff0d6;
+$color-secondary-dark: #2c1810;
+$color-bg: #fff8f0;
+$color-surface: #ffffff;
+$color-surface-alt: #faf3eb;
+$color-border: #e8ddd0;
+$color-text-primary: #2c1810;
+$color-text-secondary: #8b7d6b;
+$color-text-tertiary: #b0a490;
+$color-danger: #f44336;
+$color-success: #4caf50;
+$color-cold-chain: #00bfa5;
+$color-flash-sale: #ff3b30;
+
+$radius-card: 12px;
+$radius-button: 8px;
+$radius-pill: 24px;
+$radius-circle: 999px;
+$radius-tag: 4px;
+
+$shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+$shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+
+$space-xs: 8px;
+$space-sm: 12px;
+$space-md: 16px;
+$space-lg: 20px;
+
+/* 设计令牌速查（供团队其他成员参考） */
+/* 主色 #F5A623 / 深咖棕 #2C1810 / 奶白暖底 #FFF8F0 / 新鲜绿 #4CAF50 / 冷链 #00BFA5 */

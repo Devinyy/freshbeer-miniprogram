@@ -1,0 +1,13 @@
+# Dependencies and build output
+freshbeer-miniprogram/node_modules/
+freshbeer-miniprogram/dist/
+
+# Local tooling and OS files
+.DS_Store
+.workbuddy/
+
+# Sensitive business / identity documents are intentionally not versioned
+*.jpg
+*.jpeg
+*.png
+!freshbeer-miniprogram/src/static/**/*.png

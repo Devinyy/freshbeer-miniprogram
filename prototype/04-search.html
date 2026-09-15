@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 搜索页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 搜索</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-danger: #F44336;
+    --color-flash-sale: #FF3B30;
+    --color-flash-sale-bg: #FFE5E3;
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --font-heading: "PingFang SC", "HarmonyOS Sans SC", sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 顶部搜索栏 */
+  .search-header {
+    background: var(--color-surface);
+    padding: 10px var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .search-header__back {
+    color: var(--color-text-primary);
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  .search-header__input-wrap {
+    flex: 1;
+    height: 40px;
+    background: var(--color-surface-alt);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+    border: 1.5px solid var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+  }
+  .search-header__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 15px;
+    color: var(--color-text-primary);
+  }
+  .search-header__input::placeholder { color: var(--color-text-tertiary); }
+  .search-header__search-btn {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border: none;
+    border-radius: 14px;
+    height: 28px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* 搜索内容区 */
+  .search-content {
+    padding: var(--space-md);
+    height: calc(812px - 58px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 热搜榜 */
+  .hot-search {
+    margin-bottom: var(--space-lg);
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .section-title__icon {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hot-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 10px 0;
+  }
+  .hot-item__rank {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-number);
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .hot-item__rank--top { background: var(--color-danger); color: #FFF; }
+  .hot-item__rank--1 { background: #FF3B30; }
+  .hot-item__rank--2 { background: #FF6B35; }
+  .hot-item__rank--3 { background: #FF9800; }
+  .hot-item__rank--normal { background: var(--color-surface-alt); color: var(--color-text-secondary); }
+  .hot-item__text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text-primary);
+  }
+  .hot-item__tag {
+    font-size: 10px;
+    color: var(--color-flash-sale);
+    background: var(--color-flash-sale-bg);
+    padding: 1px 5px;
+    border-radius: var(--radius-tag);
+    font-weight: 600;
+  }
+  .hot-item__trend {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+  }
+
+  /* 历史搜索 */
+  .history-section {
+    margin-bottom: var(--space-lg);
+  }
+  .history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+  }
+  .history-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .history-tag {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+  .history-tag:active { background: var(--color-surface-alt); }
+  .clear-btn {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+
+  /* 联想词 */
+  .suggest-section {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  .suggest-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px var(--space-md);
+    border-bottom: 1px solid var(--color-border-light);
+    cursor: pointer;
+  }
+  .suggest-item:last-child { border-bottom: none; }
+  .suggest-item:active { background: var(--color-surface-alt); }
+  .suggest-item__icon { color: var(--color-text-tertiary); flex-shrink: 0; }
+  .suggest-item__text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--color-text-primary);
+  }
+  .suggest-item__text em {
+    color: var(--color-primary);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .suggest-item__arrow { color: var(--color-text-tertiary); font-size: 12px; }
+
+  /* 合规警示 */
+  .compliance-warning {
+    text-align: center;
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    padding: var(--space-lg) var(--space-md);
+    line-height: 1.6;
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- 顶部搜索栏 -->
+  <div class="search-header">
+    <span class="search-header__back">‹</span>
+    <div class="search-header__input-wrap">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="6" stroke="#F5A623" stroke-width="1.5"/><path d="M12.5 12.5L16 16" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <input class="search-header__input" type="text" placeholder="搜索精酿、鸡尾酒、小吃…" autofocus>
+    </div>
+    <button class="search-header__search-btn">搜索</button>
+  </div>
+
+  <!-- 搜索内容区 -->
+  <div class="search-content">
+    <!-- 热搜榜 -->
+    <div class="hot-search">
+      <div class="section-title">
+        <span class="section-title__icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10 5.5L15 6L11.5 9.5L12.5 14.5L8 12L3.5 14.5L4.5 9.5L1 6L6 5.5L8 1Z" fill="#F5A623"/></svg>
+        </span>
+        热搜榜
+      </div>
+      <div class="hot-list">
+        <div class="hot-item">
+          <span class="hot-item__rank hot-item__rank--top hot-item__rank--1">1</span>
+          <span class="hot-item__text">IPA 精酿</span>
+          <span class="hot-item__tag">爆</span>
+          <span class="hot-item__trend">↑ 32%</span>
+        </div>
+        <div class="hot-item">
+          <span class="hot-item__rank hot-item__rank--top hot-item__rank--2">2</span>
+          <span class="hot-item__text">福佳白</span>
+          <span class="hot-item__trend">↑ 18%</span>
+        </div>
+        <div class="hot-item">
+          <span class="hot-item__rank hot-item__rank--top hot-item__rank--3">3</span>
+          <span class="hot-item__text">罗斯福10号</span>
+          <span class="hot-item__tag">热</span>
+        </div>
+        <div class="hot-item">
+          <span class="hot-item__rank hot-item__rank--normal">4</span>
+          <span class="hot-item__text">林德曼桃子</span>
+        </div>
+        <div class="hot-item">
+          <span class="hot-item__rank hot-item__rank--normal">5</span>
+          <span class="hot-item__text">角鲨头90分钟</span>
+        </div>
+        <div class="hot-item">
+          <span class="hot-item__rank hot-item__rank--normal">6</span>
+          <span class="hot-item__text">青岛白啤</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 历史搜索 -->
+    <div class="history-section">
+      <div class="history-header">
+        <div class="section-title" style="margin-bottom:0;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#8B7D6B" stroke-width="1.5"/><path d="M8 4V8L10.5 10" stroke="#8B7D6B" stroke-width="1.5" stroke-linecap="round"/></svg>
+          历史搜索
+        </div>
+        <div class="clear-btn">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4H12M5 4V2.5C5 2.22 5.22 2 5.5 2H8.5C8.78 2 9 2.22 9 2.5V4M4 4L4.5 12C4.5 12.28 4.72 12.5 5 12.5H9C9.28 12.5 9.5 12.28 9.5 12L10 4" stroke="#B0A490" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          清除
+        </div>
+      </div>
+      <div class="history-tags">
+        <span class="history-tag">鹅岛 IPA</span>
+        <span class="history-tag">京A工啤</span>
+        <span class="history-tag">威士忌</span>
+        <span class="history-tag">花生米</span>
+        <span class="history-tag">精酿生啤</span>
+        <span class="history-tag">林德曼</span>
+      </div>
+    </div>
+
+    <!-- 联想搜索（输入"IPA"时） -->
+    <div class="suggest-section">
+      <div class="suggest-item">
+        <svg class="suggest-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="suggest-item__text"><em>IPA</em> 精酿啤酒</span>
+        <span class="suggest-item__arrow">›</span>
+      </div>
+      <div class="suggest-item">
+        <svg class="suggest-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="suggest-item__text">鹅岛 <em>IPA</em></span>
+        <span class="suggest-item__arrow">›</span>
+      </div>
+      <div class="suggest-item">
+        <svg class="suggest-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="suggest-item__text">酿酒狗朋克 <em>IPA</em></span>
+        <span class="suggest-item__arrow">›</span>
+      </div>
+      <div class="suggest-item">
+        <svg class="suggest-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="suggest-item__text">京A 飞拳 <em>IPA</em></span>
+        <span class="suggest-item__arrow">›</span>
+      </div>
+      <div class="suggest-item">
+        <svg class="suggest-item__icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="suggest-item__text">角鲨头90分钟 <em>IPA</em></span>
+        <span class="suggest-item__arrow">›</span>
+      </div>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+</body>
+</html>

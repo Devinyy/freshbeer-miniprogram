@@ -1,0 +1,30 @@
+{
+  "categories": [
+    { "id": "fresh", "name": "精酿生啤", "icon": "🍺", "sort": 1 },
+    { "id": "gin", "name": "金汤力", "icon": "🍸", "sort": 2 },
+    { "id": "whisky", "name": "威士忌", "icon": "🥃", "sort": 3 },
+    { "id": "domestic", "name": "国内罐瓶", "icon": "🍻", "sort": 4 },
+    { "id": "import", "name": "国外罐瓶", "icon": "🍾", "sort": 5 },
+    { "id": "snack", "name": "小吃", "icon": "🍟", "sort": 6 },
+    { "id": "soft", "name": "无酒精", "icon": "🥤", "sort": 7 },
+    { "id": "comp", "name": "打碎赔付", "icon": "💔", "sort": 8 }
+  ],
+  "products": [
+    { "id": "p1", "categoryId": "fresh", "name": "鹅岛 IPA 印度淡色艾尔", "origin": "美国", "abv": 5.9, "ibu": 55, "volume": "330ml", "price": 38, "storagePrice": 35.5, "tags": ["cold", "hot"], "stock": 80, "onSale": true, "flashSale": false, "desc": "经典美式 IPA，柑橘与松针香气突出，苦度均衡。" },
+    { "id": "p2", "categoryId": "fresh", "name": "福佳白 比利时小麦", "origin": "比利时", "abv": 4.9, "ibu": 12, "volume": "330ml", "price": 14, "storagePrice": 12, "tags": ["cold", "new"], "stock": 120, "onSale": true, "flashSale": false, "desc": "橙皮与芫荽风味，云雾金黄，清爽易饮。" },
+    { "id": "p3", "categoryId": "fresh", "name": "酿酒狗 朋克 IPA", "origin": "英国", "abv": 5.6, "ibu": 45, "volume": "330ml", "price": 42, "storagePrice": 39, "tags": ["cold"], "stock": 60, "onSale": true, "flashSale": false, "desc": "热带水果与花香，酒花爆炸感十足。" },
+    { "id": "p4", "categoryId": "fresh", "name": "京A 工人淡色艾尔", "origin": "中国·北京", "abv": 4.5, "ibu": 30, "volume": "330ml", "price": 28, "storagePrice": 25.5, "tags": ["cold", "hot"], "stock": 90, "onSale": true, "flashSale": false, "desc": "本土精酿代表，麦芽甜香配轻盈酒花。" },
+    { "id": "p5", "categoryId": "gin", "name": "经典金汤力 Gin Tonic", "origin": "英国", "abv": 8, "volume": "330ml", "price": 45, "storagePrice": 42, "tags": ["cold"], "stock": 60, "onSale": true, "flashSale": false, "desc": "伦敦干金酒配汤力水与青柠，气泡清爽。" },
+    { "id": "p6", "categoryId": "whisky", "name": "杰克丹尼 田纳西威士忌", "origin": "美国", "abv": 40, "volume": "700ml", "price": 198, "storagePrice": 188, "tags": ["hot"], "stock": 30, "onSale": true, "flashSale": false, "desc": "焦糖与香草，顺滑醇厚，威士忌入门首选。" },
+    { "id": "p7", "categoryId": "whisky", "name": "山崎 12 年单一麦芽", "origin": "日本", "abv": 43, "volume": "700ml", "price": 880, "storagePrice": 850, "tags": ["new"], "stock": 8, "onSale": true, "flashSale": false, "desc": "果香与木桶交织，日威典范之作。" },
+    { "id": "p8", "categoryId": "domestic", "name": "青岛白啤 小麦啤酒", "origin": "中国·青岛", "abv": 4.1, "volume": "500ml", "price": 12, "storagePrice": 10.5, "tags": ["cold"], "stock": 200, "onSale": true, "flashSale": false, "desc": "国内经典白啤，麦芽香柔和，泡沫细腻。" },
+    { "id": "p9", "categoryId": "domestic", "name": "泰山 原浆 7 天鲜啤", "origin": "中国·泰安", "abv": 3.8, "volume": "1L", "price": 22, "storagePrice": 19.9, "tags": ["cold", "hot"], "stock": 70, "onSale": true, "flashSale": false, "desc": "未杀菌原浆，7 天保质期，极致新鲜。" },
+    { "id": "p10", "categoryId": "import", "name": "罗斯福 10 号 修道院四料", "origin": "比利时", "abv": 11.3, "volume": "330ml", "price": 58, "storagePrice": 54, "tags": ["hot"], "stock": 40, "onSale": true, "flashSale": false, "desc": "深色四料，葡萄干与焦糖，层次磅礴。" },
+    { "id": "p11", "categoryId": "import", "name": "角鲨头 90 分钟 IPA", "origin": "美国", "abv": 9, "volume": "355ml", "price": 78, "storagePrice": 72, "tags": ["new"], "stock": 25, "onSale": true, "flashSale": false, "desc": "连续熬煮 90 分钟，酒花炸弹，烈性 IPA。" },
+    { "id": "p12", "categoryId": "snack", "name": "孜然风味牛肉干", "origin": "中国", "abv": 0, "volume": "100g", "price": 26, "storagePrice": 24, "tags": [], "stock": 150, "onSale": true, "flashSale": false, "desc": "下酒必备，嚼劲十足，越嚼越香。" },
+    { "id": "p13", "categoryId": "snack", "name": "麻辣花生毛豆拼盘", "origin": "中国", "abv": 0, "volume": "200g", "price": 18, "storagePrice": 16, "tags": ["new"], "stock": 120, "onSale": true, "flashSale": false, "desc": "经典佐酒小食，麻辣鲜香。" },
+    { "id": "p14", "categoryId": "soft", "name": "鲜榨橙汁（无酒精）", "origin": "中国", "abv": 0, "volume": "300ml", "price": 16, "storagePrice": 14.5, "tags": ["cold"], "stock": 100, "onSale": true, "flashSale": false, "desc": "100% 鲜榨，代驾与不胜酒力者的友好选择。" },
+    { "id": "p15", "categoryId": "comp", "name": "精美啤酒杯（破损赔付）", "origin": "官方", "abv": 0, "volume": "500ml", "price": 39, "storagePrice": 36, "tags": ["new"], "stock": 999, "onSale": true, "flashSale": false, "desc": "配送途中如破损，拍照即赔，安心享受。" },
+    { "id": "p16", "categoryId": "fresh", "name": "限时秒杀 林德曼 桃子", "origin": "比利时", "abv": 2.5, "volume": "250ml", "price": 49, "storagePrice": 45, "tags": ["flash"], "stock": 20, "onSale": true, "flashSale": true, "flashPrice": 29, "flashEndAt": 0, "desc": "果味兰比克，粉红泡沫，秒杀价限时抢。" }
+  ]
+}

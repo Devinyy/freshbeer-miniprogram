@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 搜索结果页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 搜索结果</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-success-light: #E8F5E9;
+    --color-danger: #F44336;
+    --color-flash-sale: #FF3B30;
+    --color-flash-sale-bg: #FFE5E3;
+    --color-cold-chain: #00BFA5;
+    --color-cold-chain-bg: #E0F7F4;
+    --color-storage-exclusive: #F5A623;
+    --color-storage-exclusive-bg: #FFF0D6;
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-heading: "PingFang SC", "HarmonyOS Sans SC", sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-image: 8px;
+    --radius-button: 8px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --radius-circle: 999px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 顶部搜索栏 */
+  .search-header {
+    background: var(--color-surface);
+    padding: 10px var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .search-header__back {
+    color: var(--color-text-primary);
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  .search-header__input-wrap {
+    flex: 1;
+    height: 40px;
+    background: var(--color-surface-alt);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .search-header__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: var(--color-text-primary);
+  }
+  .search-header__clear {
+    color: var(--color-text-tertiary);
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  /* 筛选排序栏 */
+  .filter-bar {
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-md);
+    height: 44px;
+    gap: var(--space-md);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .filter-item {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .filter-item--active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  .filter-item--active svg { fill: var(--color-primary); }
+  .filter-item__divider {
+    width: 1px;
+    height: 16px;
+    background: var(--color-border-light);
+  }
+  .filter-item--right {
+    margin-left: auto;
+  }
+
+  /* 结果统计 */
+  .result-summary {
+    padding: var(--space-xs) var(--space-md);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    background: var(--color-bg);
+  }
+  .result-summary strong {
+    color: var(--color-primary);
+    font-family: var(--font-number);
+  }
+
+  /* 商品列表 */
+  .product-list {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .product-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-sm);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    position: relative;
+  }
+
+  .product-card__image {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-image);
+    flex-shrink: 0;
+    object-fit: cover;
+    background: var(--color-surface-alt);
+  }
+
+  .product-card__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .product-card__header {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+  .product-card__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+  .product-card__title em {
+    color: var(--color-primary);
+    font-style: normal;
+  }
+
+  .product-card__sub {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 4px;
+  }
+
+  .product-card__tags {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 1px 5px;
+    border-radius: var(--radius-tag);
+    display: inline-flex;
+    align-items: center;
+  }
+  .tag--storage { background: var(--color-storage-exclusive-bg); color: var(--color-storage-exclusive); }
+  .tag--cold-chain { background: var(--color-cold-chain-bg); color: var(--color-cold-chain); }
+  .tag--new { background: var(--color-success-light); color: var(--color-success); }
+  .tag--hot { background: var(--color-danger); color: var(--color-text-inverse); font-weight: 700; }
+
+  .product-card__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .product-card__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .product-card__storage-price {
+    font-family: var(--font-number);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .product-card__storage-price::before { content: '¥'; font-size: 12px; font-weight: 500; }
+  .product-card__original-price {
+    font-family: var(--font-number);
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    text-decoration: line-through;
+  }
+
+  .btn-add {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-circle);
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .btn-spec {
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: var(--radius-button);
+    padding: 4px 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* 空状态 */
+  .empty-state {
+    text-align: center;
+    padding: 80px var(--space-md);
+  }
+  .empty-state__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-md);
+    opacity: 0.3;
+  }
+  .empty-state__text {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  /* 合规警示 */
+  .compliance-warning {
+    text-align: center;
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    padding: 8px var(--space-md);
+    line-height: 1.6;
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- 顶部搜索栏 -->
+  <div class="search-header">
+    <span class="search-header__back">‹</span>
+    <div class="search-header__input-wrap">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#8B7D6B" stroke-width="1.5"/><path d="M11 11L14 14" stroke="#8B7D6B" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <input class="search-header__input" type="text" value="IPA">
+      <span class="search-header__clear">✕</span>
+    </div>
+  </div>
+
+  <!-- 筛选排序栏 -->
+  <div class="filter-bar">
+    <div class="filter-item filter-item--active">
+      综合
+    </div>
+    <div class="filter-item">
+      销量
+      <svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M5 1V11M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/><path d="M1 9L5 11L9 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="filter-item">
+      价格
+      <svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M5 1V11M1 5L5 1L9 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 9L5 11L9 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/></svg>
+    </div>
+    <div class="filter-item filter-item--right">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="3" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="10" width="5" height="3" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="10" width="5" height="3" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+      筛选
+    </div>
+  </div>
+
+  <!-- 结果统计 -->
+  <div class="result-summary">
+    为您找到 <strong>8</strong> 款关于"IPA"的商品
+  </div>
+
+  <!-- 商品列表 -->
+  <div class="product-list">
+    <!-- 商品 1 -->
+    <div class="product-card">
+      <img class="product-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='8' fill='%23E8A317'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-size='20' fill='%23FFF8F0' font-family='sans-serif'%3EIPA%3C/text%3E%3C/svg%3E" alt="鹅岛IPA">
+      <div class="product-card__info">
+        <div>
+          <div class="product-card__header">
+            <span class="product-card__title">鹅岛 <em>IPA</em> 精酿</span>
+          </div>
+          <div class="product-card__sub">美国 · 6.5%vol · 330ml · 月销 2.3k</div>
+          <div class="product-card__tags">
+            <span class="tag tag--storage">储值专享</span>
+            <span class="tag tag--cold-chain">冷链</span>
+          </div>
+        </div>
+        <div class="product-card__bottom">
+          <div class="product-card__price-row">
+            <span class="product-card__storage-price">55.10</span>
+            <span class="product-card__original-price">¥58.0</span>
+          </div>
+          <button class="btn-spec">选规格</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品 2 -->
+    <div class="product-card">
+      <img class="product-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='8' fill='%233D2817'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-size='8' fill='%23F5A623' font-family='sans-serif'%3E朋克IPA%3C/text%3E%3C/svg%3E" alt="酿酒狗朋克IPA">
+      <div class="product-card__info">
+        <div>
+          <div class="product-card__header">
+            <span class="product-card__title">酿酒狗朋克 <em>IPA</em></span>
+          </div>
+          <div class="product-card__sub">苏格兰 · 5.6%vol · 330ml · 月销 1.8k</div>
+          <div class="product-card__tags">
+            <span class="tag tag--storage">储值专享</span>
+            <span class="tag tag--hot">热销</span>
+          </div>
+        </div>
+        <div class="product-card__bottom">
+          <div class="product-card__price-row">
+            <span class="product-card__storage-price">29.90</span>
+            <span class="product-card__original-price">¥38.0</span>
+          </div>
+          <button class="btn-spec">选规格</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品 3 -->
+    <div class="product-card">
+      <img class="product-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='8' fill='%23E8951A'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-size='8' fill='%23FFF8F0' font-family='sans-serif'%3E京A飞拳%3C/text%3E%3C/svg%3E" alt="京A飞拳IPA">
+      <div class="product-card__info">
+        <div>
+          <div class="product-card__header">
+            <span class="product-card__title">京A 飞拳 <em>IPA</em></span>
+          </div>
+          <div class="product-card__sub">中国 · 6.8%vol · 355ml · 月销 956</div>
+          <div class="product-card__tags">
+            <span class="tag tag--storage">储值专享</span>
+            <span class="tag tag--cold-chain">冷链</span>
+            <span class="tag tag--new">新品</span>
+          </div>
+        </div>
+        <div class="product-card__bottom">
+          <div class="product-card__price-row">
+            <span class="product-card__storage-price">22.80</span>
+            <span class="product-card__original-price">¥24.0</span>
+          </div>
+          <button class="btn-add">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品 4 -->
+    <div class="product-card">
+      <img class="product-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='8' fill='%23FF6B35'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-size='7' fill='%23FFF8F0' font-family='sans-serif'%3E角鲨头90%3C/text%3E%3C/svg%3E" alt="角鲨头90分钟">
+      <div class="product-card__info">
+        <div>
+          <div class="product-card__header">
+            <span class="product-card__title">角鲨头90分钟 <em>IPA</em></span>
+          </div>
+          <div class="product-card__sub">美国 · 9.0%vol · 355ml · 月销 672</div>
+          <div class="product-card__tags">
+            <span class="tag tag--storage">储值专享</span>
+          </div>
+        </div>
+        <div class="product-card__bottom">
+          <div class="product-card__price-row">
+            <span class="product-card__storage-price">42.00</span>
+            <span class="product-card__original-price">¥45.0</span>
+          </div>
+          <button class="btn-spec">选规格</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品 5 -->
+    <div class="product-card">
+      <img class="product-card__image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' rx='8' fill='%23D4A843'/%3E%3Ctext x='40' y='48' text-anchor='middle' font-size='7' fill='%23FFF8F0' font-family='sans-serif'%3E拳击猫IPA%3C/text%3E%3C/svg%3E" alt="拳击猫IPA">
+      <div class="product-card__info">
+        <div>
+          <div class="product-card__header">
+            <span class="product-card__title">拳击猫 <em>IPA</em></span>
+          </div>
+          <div class="product-card__sub">中国 · 5.8%vol · 330ml · 月销 445</div>
+          <div class="product-card__tags">
+            <span class="tag tag--storage">储值专享</span>
+          </div>
+        </div>
+        <div class="product-card__bottom">
+          <div class="product-card__price-row">
+            <span class="product-card__storage-price">18.90</span>
+            <span class="product-card__original-price">¥20.0</span>
+          </div>
+          <button class="btn-add">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+</body>
+</html>

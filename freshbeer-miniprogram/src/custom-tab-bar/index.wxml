@@ -1,0 +1,6 @@
+<view class="tabbar">
+  <view wx:for="{{list}}" wx:key="pagePath" class="tabbar__item {{selected === index ? 'tabbar__item--active' : ''}}" data-path="{{item.pagePath}}" bindtap="switchTab">
+    <view class="tabbar__cart-wrap {{item.pagePath === 'pages/cart/cart' ? 'tabbar__cart-wrap--raised' : ''}}"><image class="tabbar__icon" src="{{selected === index ? item.activeIcon : item.icon}}" mode="aspectFit" /></view>
+    <text class="tabbar__label">{{item.text}}</text>
+  </view>
+</view>

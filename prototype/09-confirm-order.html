@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 确认订单页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 确认订单</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-success-light: #E8F5E9;
+    --color-danger: #F44336;
+    --color-warning: #FF9800;
+    --color-storage-exclusive: #F5A623;
+    --color-storage-exclusive-bg: #FFF0D6;
+    --color-cold-chain: #00BFA5;
+    --color-cold-chain-bg: #E0F7F4;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-image: 8px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --radius-circle: 999px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 导航栏 */
+  .nav-bar {
+    height: 44px;
+    background: var(--color-surface);
+    display: flex; align-items: center;
+    padding: 0 var(--space-md);
+    border-bottom: 1px solid var(--color-border-light);
+    position: relative;
+  }
+  .nav-bar__back { font-size: 22px; color: var(--color-text-primary); line-height: 1; text-decoration: none; }
+  .nav-bar__title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: 17px; font-weight: 600; color: var(--color-text-primary);
+  }
+
+  /* 滚动区 */
+  .scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: 80px;
+  }
+
+  /* 地址卡片 */
+  .address-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  .address-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: repeating-linear-gradient(90deg, var(--color-primary) 0, var(--color-primary) 12px, transparent 12px, transparent 18px, var(--color-primary) 18px, var(--color-primary) 24px, var(--color-cold-chain) 24px, var(--color-cold-chain) 36px, transparent 36px, transparent 42px);
+  }
+  .address-card__header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .address-card__name { font-size: 16px; font-weight: 700; color: var(--color-text-primary); }
+  .address-card__phone { font-size: 14px; color: var(--color-text-secondary); font-family: var(--font-number); }
+  .address-card__tag {
+    font-size: 10px; padding: 1px 6px; border-radius: var(--radius-tag);
+    background: var(--color-primary-light); color: var(--color-primary); font-weight: 600;
+  }
+  .address-card__detail {
+    font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;
+  }
+  .address-card__arrow {
+    position: absolute; right: var(--space-md); top: 50%; transform: translateY(-50%);
+    color: var(--color-text-tertiary); font-size: 16px;
+  }
+
+  /* 配送方式 */
+  .section-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+  }
+  .section-card__header {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 14px; font-weight: 700; color: var(--color-text-primary);
+    display: flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .section-card__body { padding: var(--space-md); }
+
+  /* 配送选项 */
+  .delivery-options {
+    display: flex; gap: 8px;
+  }
+  .delivery-option {
+    flex: 1;
+    padding: var(--space-sm);
+    border: 1.5px solid var(--color-border);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .delivery-option--active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+  }
+  .delivery-option__title {
+    font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px;
+  }
+  .delivery-option--active .delivery-option__title { color: var(--color-primary); }
+  .delivery-option__desc {
+    font-size: 11px; color: var(--color-text-secondary);
+  }
+  .delivery-option__time {
+    font-size: 11px; color: var(--color-success); font-weight: 600; margin-top: 2px;
+  }
+
+  /* 商品明细 */
+  .order-item {
+    display: flex; gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .order-item:last-child { border-bottom: none; }
+  .order-item__image {
+    width: 56px; height: 56px; border-radius: var(--radius-image);
+    flex-shrink: 0; background: var(--color-surface-alt);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--color-text-secondary);
+  }
+  .order-item__info { flex: 1; }
+  .order-item__title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+  .order-item__spec { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .order-item__bottom { display: flex; align-items: center; justify-content: space-between; }
+  .order-item__price {
+    font-family: var(--font-number); font-size: 14px; font-weight: 700; color: var(--color-primary);
+  }
+  .order-item__price::before { content: '¥'; font-size: 10px; }
+  .order-item__qty {
+    font-size: 12px; color: var(--color-text-secondary);
+    font-family: var(--font-number);
+  }
+
+  /* 费用明细 */
+  .fee-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0;
+    font-size: 13px;
+  }
+  .fee-row__label { color: var(--color-text-secondary); }
+  .fee-row__value { font-family: var(--font-number); color: var(--color-text-primary); font-weight: 600; }
+  .fee-row__value--discount { color: var(--color-danger); }
+  .fee-row__value--storage { color: var(--color-primary); }
+  .fee-row__hint { font-size: 10px; color: var(--color-text-tertiary); }
+
+  /* 优惠券行 */
+  .coupon-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+  }
+  .coupon-row__label { font-size: 13px; color: var(--color-text-primary); }
+  .coupon-row__value { font-size: 13px; color: var(--color-danger); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+
+  /* 支付方式 */
+  .pay-option {
+    display: flex; align-items: center; gap: var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .pay-option:last-child { border-bottom: none; }
+  .pay-option__icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .pay-option__icon--wechat { background: #07C160; }
+  .pay-option__icon--storage { background: var(--color-primary-light); }
+  .pay-option__info { flex: 1; }
+  .pay-option__name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+  .pay-option__desc { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .pay-option__radio {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  }
+  .pay-option__radio--checked {
+    background: var(--color-primary); border-color: var(--color-primary);
+  }
+  .pay-option__badge {
+    font-size: 10px; padding: 1px 6px; border-radius: var(--radius-tag);
+    background: var(--color-storage-exclusive-bg); color: var(--color-storage-exclusive); font-weight: 600;
+  }
+
+  /* 备注 */
+  .remark-row {
+    display: flex; align-items: center; gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+  }
+  .remark-row__label { font-size: 13px; color: var(--color-text-primary); flex-shrink: 0; }
+  .remark-row__input {
+    flex: 1; border: none; outline: none;
+    font-size: 13px; color: var(--color-text-primary); background: transparent;
+  }
+  .remark-row__input::placeholder { color: var(--color-text-tertiary); }
+
+  /* 合规警示 */
+  .compliance-box {
+    background: #FFF3E0;
+    border-radius: 8px;
+    padding: var(--space-sm) var(--space-md);
+    margin: var(--space-sm) 0;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--color-warning); line-height: 1.5;
+  }
+
+  /* 底部提交栏 */
+  .submit-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border-light);
+    box-shadow: 0 -2px 8px rgba(44, 24, 16, 0.06);
+    display: flex; align-items: center;
+    padding: 0 var(--space-md);
+    gap: var(--space-md);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .submit-bar__total {
+    flex: 1;
+  }
+  .submit-bar__price {
+    font-family: var(--font-number);
+    font-size: 24px; font-weight: 700;
+    color: var(--color-danger);
+  }
+  .submit-bar__price::before { content: '¥'; font-size: 14px; }
+  .submit-bar__hint {
+    font-size: 11px; color: var(--color-success); font-weight: 600;
+  }
+  .submit-bar__btn {
+    background: var(--gradient-primary-btn);
+    color: #FFF;
+    border: none;
+    border-radius: 24px;
+    height: 44px;
+    padding: 0 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-primary-glow);
+  }
+  .submit-bar__btn:active { opacity: 0.85; }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <div class="nav-bar">
+    <span class="nav-bar__back">‹</span>
+    <span class="nav-bar__title">确认订单</span>
+  </div>
+
+  <div class="scroll-area">
+    <!-- 地址卡片 -->
+    <div class="address-card">
+      <div class="address-card__header">
+        <span class="address-card__name">张先生</span>
+        <span class="address-card__phone">188****6688</span>
+        <span class="address-card__tag">默认</span>
+      </div>
+      <div class="address-card__detail">朝阳区望京西园三区 12号楼 3单元 502室</div>
+      <span class="address-card__arrow">›</span>
+    </div>
+
+    <!-- 配送方式 -->
+    <div class="section-card">
+      <div class="section-card__header">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 5L8 2L14 5V11L8 14L2 11V5Z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 5L8 8L14 5M8 8V14" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        配送方式
+      </div>
+      <div class="section-card__body">
+        <div class="delivery-options">
+          <div class="delivery-option delivery-option--active">
+            <div class="delivery-option__title">立即配送</div>
+            <div class="delivery-option__desc">骑手即刻取货</div>
+            <div class="delivery-option__time">约18分钟送达</div>
+          </div>
+          <div class="delivery-option">
+            <div class="delivery-option__title">预约配送</div>
+            <div class="delivery-option__desc">选择送达时间</div>
+          </div>
+          <div class="delivery-option">
+            <div class="delivery-option__title">到店自提</div>
+            <div class="delivery-option__desc">门店自取</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 商品明细 -->
+    <div class="section-card">
+      <div class="section-card__header">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 5H13L12 13H4L3 5Z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 5V3C6 2.45 6.45 2 7 2H9C9.55 2 10 2.45 10 3V5" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        商品明细
+      </div>
+      <div class="section-card__body">
+        <div class="order-item">
+          <div class="order-item__image" style="background:#E8A317;color:#FFF;font-weight:600;">IPA</div>
+          <div class="order-item__info">
+            <div class="order-item__title">鹅岛 IPA 精酿啤酒</div>
+            <div class="order-item__spec">330ml · 玻璃瓶 · 冰鲜冷藏</div>
+            <div class="order-item__bottom">
+              <span class="order-item__price">55.10 <span style="font-size:10px;color:var(--color-text-tertiary);text-decoration:line-through;">¥58.0</span></span>
+              <span class="order-item__qty">×2</span>
+            </div>
+          </div>
+        </div>
+        <div class="order-item">
+          <div class="order-item__image" style="background:#F0E0C0;color:#6B4423;font-weight:600;">福佳白</div>
+          <div class="order-item__info">
+            <div class="order-item__title">福佳白啤酒</div>
+            <div class="order-item__spec">330ml · 玻璃瓶 · 冰鲜冷藏</div>
+            <div class="order-item__bottom">
+              <span class="order-item__price">12.80 <span style="font-size:10px;color:var(--color-text-tertiary);text-decoration:line-through;">¥14.0</span></span>
+              <span class="order-item__qty">×2</span>
+            </div>
+          </div>
+        </div>
+        <div class="order-item">
+          <div class="order-item__image" style="background:#D4A843;color:#FFF;font-weight:600;">花生米</div>
+          <div class="order-item__info">
+            <div class="order-item__title">酒鬼花生米</div>
+            <div class="order-item__spec">100g · 麻辣味</div>
+            <div class="order-item__bottom">
+              <span class="order-item__price" style="color:var(--color-text-primary);">12.00</span>
+              <span class="order-item__qty">×1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 优惠券 + 备注 -->
+    <div class="section-card">
+      <div class="coupon-row">
+        <span class="coupon-row__label">优惠券</span>
+        <span class="coupon-row__value">-¥15.00 ›</span>
+      </div>
+      <div style="border-top:1px solid var(--color-border-light);"></div>
+      <div class="remark-row">
+        <span class="remark-row__label">订单备注</span>
+        <input class="remark-row__input" type="text" placeholder="放门口即可，谢谢">
+      </div>
+    </div>
+
+    <!-- 费用明细 -->
+    <div class="section-card">
+      <div class="section-card__body">
+        <div class="fee-row">
+          <span class="fee-row__label">商品总价</span>
+          <span class="fee-row__value">¥158.00</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-row__label">储值专享优惠</span>
+          <span class="fee-row__value fee-row__value--discount">-¥5.60</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-row__label">优惠券抵扣</span>
+          <span class="fee-row__value fee-row__value--discount">-¥15.00</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-row__label">配送费 <span class="fee-row__hint">(1.2km)</span></span>
+          <span class="fee-row__value">¥5.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 支付方式 -->
+    <div class="section-card">
+      <div class="section-card__header">支付方式</div>
+      <div class="section-card__body">
+        <div class="pay-option">
+          <div class="pay-option__icon pay-option__icon--storage">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="10" rx="2" stroke="#F5A623" stroke-width="1.5"/><circle cx="10" cy="10" r="2" fill="#F5A623"/></svg>
+          </div>
+          <div class="pay-option__info">
+            <div class="pay-option__name">储值卡支付 <span class="pay-option__badge">储值专享</span></div>
+            <div class="pay-option__desc">余额 ¥500.00 · 自动享专享价</div>
+          </div>
+          <div class="pay-option__radio pay-option__radio--checked">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6L5 8L9 4" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <div class="pay-option">
+          <div class="pay-option__icon pay-option__icon--wechat">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4C3.69 4 1 6.24 1 9C1 10.6 1.9 12.02 3.3 13L2.5 15L5 13.8C5.6 14 6.3 14.1 7 14.1" fill="#FFF"/><path d="M13 7C10.24 7 8 9.01 8 11.5C8 13.99 10.24 16 13 16C13.7 16 14.3 15.9 14.9 15.7L17 16.8L16.3 14.8C17.3 13.9 18 12.8 18 11.5C18 9.01 15.76 7 13 7Z" fill="#FFF"/></svg>
+          </div>
+          <div class="pay-option__info">
+            <div class="pay-option__name">微信支付</div>
+            <div class="pay-option__desc">使用微信零钱或银行卡支付</div>
+          </div>
+          <div class="pay-option__radio"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-box">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" flex-shrink:0;"><path d="M7 1L13 12H1L7 1Z" stroke="#FF9800" stroke-width="1.5" stroke-linejoin="round"/><line x1="7" y1="5" x2="7" y2="9" stroke="#FF9800" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="11" r="0.8" fill="#FF9800"/></svg>
+      本订单含酒精饮品，仅限18周岁以上成年人购买。请适量饮酒，禁止酒驾。未成年人禁止购买。
+    </div>
+  </div>
+
+  <!-- 底部提交栏 -->
+  <div class="submit-bar">
+    <div class="submit-bar__total">
+      <span class="submit-bar__price">142.40</span>
+      <div class="submit-bar__hint">已优惠 ¥20.60</div>
+    </div>
+    <button class="submit-bar__btn">提交订单</button>
+  </div>
+</body>
+</html>

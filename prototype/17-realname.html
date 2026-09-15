@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 实名认证页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 实名认证</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-success-light: #E8F5E9;
+    --color-danger: #F44336;
+    --color-danger-light: #FFEBEE;
+    --color-warning: #FF9800;
+    --color-warning-light: #FFF3E0;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-image: 8px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+    --space-xl: 24px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-bar {
+    height: 44px; background: var(--color-surface);
+    display: flex; align-items: center;
+    padding: 0 var(--space-md); position: relative;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .nav-bar__back { font-size: 22px; color: var(--color-text-primary); line-height: 1; }
+  .nav-bar__title {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: 17px; font-weight: 600; color: var(--color-text-primary);
+  }
+
+  .scroll-area {
+    flex: 1; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-md);
+    padding-bottom: 100px;
+  }
+
+  /* 合规警示条 */
+  .compliance-banner {
+    background: var(--color-danger-light);
+    border-radius: var(--radius-card);
+    padding: var(--space-sm) var(--space-md);
+    display: flex; align-items: flex-start; gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .compliance-banner__icon {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--color-danger);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .compliance-banner__text {
+    font-size: 12px; color: var(--color-danger); line-height: 1.5;
+  }
+  .compliance-banner__text strong { font-weight: 700; }
+
+  /* 步骤指示器 */
+  .steps {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: var(--space-lg);
+  }
+  .step {
+    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .step__dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--color-surface); border: 2px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: var(--color-text-tertiary);
+    font-family: var(--font-number);
+  }
+  .step--done .step__dot {
+    background: var(--color-success); border-color: var(--color-success); color: #FFF;
+  }
+  .step--current .step__dot {
+    background: var(--color-primary); border-color: var(--color-primary); color: #FFF;
+  }
+  .step__label { font-size: 11px; color: var(--color-text-secondary); }
+  .step--done .step__label, .step--current .step__label {
+    color: var(--color-text-primary); font-weight: 600;
+  }
+  .step-line {
+    flex: 0 0 30px; height: 2px; background: var(--color-border);
+    margin-bottom: 18px;
+  }
+  .step-line--done { background: var(--color-success); }
+
+  /* 身份证上传 */
+  .upload-section {
+    margin-bottom: var(--space-lg);
+  }
+  .section-title {
+    font-size: 15px; font-weight: 700; color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .section-desc {
+    font-size: 12px; color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+  }
+
+  .upload-grid {
+    display: flex; gap: var(--space-sm);
+  }
+  .upload-box {
+    flex: 1;
+    aspect-ratio: 1.6;
+    border-radius: var(--radius-card);
+    border: 2px dashed var(--color-border);
+    background: var(--color-surface);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .upload-box--done {
+    border-style: solid;
+    border-color: var(--color-success);
+    background: var(--color-success-light);
+  }
+  .upload-box__icon {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .upload-box__text {
+    font-size: 13px; font-weight: 600; color: var(--color-text-primary);
+  }
+  .upload-box__hint {
+    font-size: 11px; color: var(--color-text-tertiary);
+  }
+  .upload-box--done .upload-box__text { color: var(--color-success); }
+
+  /* 身份证信息表单 */
+  .form-section {
+    margin-bottom: var(--space-lg);
+  }
+  .form-item {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    margin-bottom: var(--space-sm);
+    box-shadow: var(--shadow-card);
+    display: flex; align-items: center; gap: var(--space-sm);
+  }
+  .form-item__label {
+    font-size: 14px; font-weight: 600; color: var(--color-text-primary);
+    flex-shrink: 0; width: 70px;
+  }
+  .form-item__input {
+    flex: 1; border: none; outline: none;
+    font-size: 14px; color: var(--color-text-primary); background: transparent;
+  }
+  .form-item__input::placeholder { color: var(--color-text-tertiary); }
+  .form-item__value {
+    flex: 1; font-size: 14px; color: var(--color-text-primary);
+  }
+  .form-item__scan {
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-primary);
+  }
+
+  /* 人脸识别 */
+  .face-section {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+  .face-guide {
+    width: 140px; height: 170px;
+    margin: 0 auto var(--space-md);
+    border-radius: 70px 70px 12px 12px;
+    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-surface) 100%);
+    border: 2px dashed var(--color-primary);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .face-guide__icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .face-guide__scan-line {
+    position: absolute;
+    top: 30px; left: 20px; right: 20px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    animation: scanMove 2s ease-in-out infinite;
+  }
+  @keyframes scanMove {
+    0%, 100% { top: 30px; }
+    50% { top: 120px; }
+  }
+  .face-desc {
+    font-size: 13px; color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  /* 隐私保护说明 */
+  .privacy-notice {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-lg);
+  }
+  .privacy-notice__title {
+    font-size: 13px; font-weight: 700; color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .privacy-notice__list {
+    font-size: 12px; color: var(--color-text-secondary);
+    line-height: 1.8;
+    padding-left: 16px;
+  }
+  .privacy-notice__list li { list-style: disc; }
+
+  /* 合规警示 */
+  .compliance-warning {
+    text-align: center; font-size: 11px; color: var(--color-text-tertiary);
+    padding: var(--space-sm); line-height: 1.6;
+  }
+
+  /* 底部按钮 */
+  .submit-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: var(--space-md);
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border-light);
+    box-shadow: 0 -2px 8px rgba(44, 24, 16, 0.04);
+  }
+  .submit-btn {
+    width: 100%; height: 48px;
+    background: var(--gradient-primary-btn);
+    color: #FFF;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-size: 16px; font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-primary-glow);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .submit-btn:active { opacity: 0.85; }
+
+  /* 协议勾选 */
+  .agree-row {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: var(--space-sm);
+    font-size: 12px; color: var(--color-text-secondary);
+  }
+  .agree-checkbox {
+    width: 16px; height: 16px; border-radius: 4px;
+    border: 1.5px solid var(--color-primary);
+    background: var(--color-primary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .agree-row a { color: var(--color-primary); text-decoration: none; }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="nav-bar">
+    <span class="nav-bar__back">‹</span>
+    <span class="nav-bar__title">实名认证</span>
+  </div>
+
+  <div class="scroll-area">
+    <!-- 合规警示 -->
+    <div class="compliance-banner">
+      <div class="compliance-banner__icon">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 12H1L7 1Z" fill="#FFF"/><line x1="7" y1="5" x2="7" y2="9" stroke="#F44336" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="11" r="0.8" fill="#F44336"/></svg>
+      </div>
+      <div class="compliance-banner__text">
+        <strong>根据《未成年人保护法》第59条及2025年新规</strong>，购买酒精饮品需完成实名认证。未满18周岁禁止购买。
+      </div>
+    </div>
+
+    <!-- 步骤指示器 -->
+    <div class="steps">
+      <div class="step step--current">
+        <div class="step__dot">1</div>
+        <span class="step__label">身份信息</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step__dot">2</div>
+        <span class="step__label">人脸识别</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <div class="step__dot">3</div>
+        <span class="step__label">认证完成</span>
+      </div>
+    </div>
+
+    <!-- 身份证上传 -->
+    <div class="upload-section">
+      <div class="section-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#F5A623" stroke-width="1.5"/><circle cx="6" cy="7" r="1.5" stroke="#F5A623" stroke-width="1.2"/><line x1="9" y1="6" x2="12" y2="6" stroke="#F5A623" stroke-width="1.2"/><line x1="9" y1="8" x2="12" y2="8" stroke="#F5A623" stroke-width="1.2"/><line x1="4" y1="11" x2="8" y2="11" stroke="#F5A623" stroke-width="1.2"/></svg>
+        上传身份证
+      </div>
+      <div class="section-desc">请上传清晰的身份证照片，系统将自动识别信息</div>
+      <div class="upload-grid">
+        <div class="upload-box upload-box--done">
+          <div class="upload-box__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="2" fill="#4CAF50" opacity="0.2"/><rect x="4" y="8" width="24" height="16" rx="2" stroke="#4CAF50" stroke-width="1.5"/><circle cx="11" cy="14" r="2.5" fill="#4CAF50"/><line x1="16" y1="13" x2="24" y2="13" stroke="#4CAF50" stroke-width="1.2"/><line x1="16" y1="16" x2="24" y2="16" stroke="#4CAF50" stroke-width="1.2"/><line x1="8" y1="20" x2="18" y2="20" stroke="#4CAF50" stroke-width="1.2"/></svg>
+          </div>
+          <div class="upload-box__text">已上传</div>
+          <div class="upload-box__hint">人像面</div>
+        </div>
+        <div class="upload-box">
+          <div class="upload-box__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="2" stroke="#B0A490" stroke-width="1.5" stroke-dasharray="3 2"/><path d="M16 12V20M12 16H20" stroke="#B0A490" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="upload-box__text">点击上传</div>
+          <div class="upload-box__hint">国徽面</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 身份信息表单 -->
+    <div class="form-section">
+      <div class="section-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="#F5A623" stroke-width="1.5"/><path d="M2 14C2 11 4.5 9 8 9C11.5 9 14 11 14 14" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg>
+        身份信息
+      </div>
+      <div class="form-item">
+        <span class="form-item__label">姓名</span>
+        <span class="form-item__value">张*明</span>
+        <span class="form-item__scan">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#F5A623" stroke-width="1.5"/><line x1="3" y1="7" x2="17" y2="7" stroke="#F5A623" stroke-width="1.5"/><line x1="7" y1="3" x2="7" y2="7" stroke="#F5A623" stroke-width="1.5"/></svg>
+        </span>
+      </div>
+      <div class="form-item">
+        <span class="form-item__label">身份证号</span>
+        <span class="form-item__value">110***********1234</span>
+        <span class="form-item__scan">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#F5A623" stroke-width="1.5"/><line x1="3" y1="7" x2="17" y2="7" stroke="#F5A623" stroke-width="1.5"/><line x1="7" y1="3" x2="7" y2="7" stroke="#F5A623" stroke-width="1.5"/></svg>
+        </span>
+      </div>
+      <div class="form-item">
+        <span class="form-item__label">出生日期</span>
+        <span class="form-item__value" style="font-family:var(--font-number);">1995-03-15</span>
+        <span class="form-item__scan">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#4CAF50" stroke-width="1.5"/><path d="M7 10L9 12L13 8" stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+      <div style="font-size:11px;color:var(--color-success);padding-left:4px;display:flex;align-items:center;gap:4px;">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#4CAF50"/><path d="M4 6L5.5 7.5L8 4.5" stroke="#FFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        年满18周岁 · 符合购酒年龄要求
+      </div>
+    </div>
+
+    <!-- 人脸识别 -->
+    <div class="face-section">
+      <div class="section-title" style="justify-content:center;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 4C5.79 4 4 5.79 4 8C4 10.21 5.79 12 8 12C10.21 12 12 10.21 12 8C12 5.79 10.21 4 8 4Z" stroke="#F5A623" stroke-width="1.5"/><path d="M3 3L5 3M11 3L13 3M3 13L5 13M11 13L13 13" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg>
+        人脸识别
+      </div>
+      <div class="face-guide">
+        <div class="face-guide__scan-line"></div>
+        <div class="face-guide__icon">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="12" r="5" stroke="#F5A623" stroke-width="1.5"/><path d="M5 25C5 20 9 17 15 17C21 17 25 20 25 25" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <div class="face-desc">
+        将面部对准框内，保持光线充足<br>正对屏幕，眨眼或摇头完成活体检测
+      </div>
+    </div>
+
+    <!-- 隐私保护 -->
+    <div class="privacy-notice">
+      <div class="privacy-notice__title">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L12 3V7C12 10 7 13 7 13C7 13 2 10 2 7V3L7 1Z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/><path d="M5 7L6.5 8.5L9 5.5" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        信息安全保护
+      </div>
+      <ul class="privacy-notice__list">
+        <li>身份信息仅用于年龄核验，加密存储</li>
+        <li>人脸数据一次性验证，不留存原始图像</li>
+        <li>符合《个人信息保护法》相关规定</li>
+        <li>认证信息不会用于其他用途</li>
+      </ul>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+
+  <!-- 底部按钮 -->
+  <div class="submit-bar">
+    <div class="agree-row">
+      <div class="agree-checkbox">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      已阅读并同意 <a>《实名认证协议》</a> 和 <a>《隐私政策》</a>
+    </div>
+    <button class="submit-btn">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.69 2 3 4.69 3 8C3 13 9 16 9 16C9 16 15 13 15 8C15 4.69 12.31 2 9 2Z" stroke="#FFF" stroke-width="1.5"/><path d="M6 8L8 10L12 6" stroke="#FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      开始人脸识别
+    </button>
+  </div>
+</body>
+</html>

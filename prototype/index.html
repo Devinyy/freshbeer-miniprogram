@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 原型预览入口 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鲜啤到 · 原型预览</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-secondary-cream: #FFF8F0;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-danger: #F44336;
+    --color-cold-chain: #00BFA5;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --gradient-beer-glass: linear-gradient(180deg, #FFF8F0 0%, #E8A317 30%, #3D2817 100%);
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-floating: 0 4px 16px rgba(44, 24, 16, 0.12);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-heading: "PingFang SC", "HarmonyOS Sans SC", "Source Han Sans CN", sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 20px;
+    --space-xl: 24px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+  }
+
+  /* Hero 区 */
+  .hero {
+    background: var(--gradient-beer-glass);
+    padding: 60px var(--space-xl) 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(245, 166, 35, 0.15);
+    filter: blur(40px);
+  }
+  .hero__logo {
+    width: 64px; height: 64px;
+    margin: 0 auto var(--space-md);
+  }
+  .hero__brand {
+    font-size: 36px;
+    font-weight: 900;
+    color: #FFF8F0;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 12px rgba(44, 24, 16, 0.3);
+  }
+  .hero__slogan {
+    font-size: 16px;
+    color: rgba(255, 248, 240, 0.8);
+    letter-spacing: 2px;
+  }
+  .hero__tag {
+    display: inline-block;
+    margin-top: var(--space-md);
+    padding: 4px 16px;
+    border-radius: 20px;
+    background: rgba(255, 248, 240, 0.15);
+    color: rgba(255, 248, 240, 0.9);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* 设计系统摘要 */
+  .design-summary {
+    max-width: 960px;
+    margin: -20px auto 0;
+    padding: 0 var(--space-xl);
+    position: relative;
+    z-index: 1;
+  }
+  .summary-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-floating);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+  .summary-item {
+    display: flex; align-items: center; gap: var(--space-sm);
+  }
+  .summary-swatch {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(44,24,16,0.1);
+  }
+  .summary-info__label { font-size: 11px; color: var(--color-text-secondary); }
+  .summary-info__value { font-size: 14px; font-weight: 700; color: var(--color-text-primary); font-family: var(--font-number); }
+  .summary-info__name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+
+  /* 内容区 */
+  .content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+  }
+
+  .section-header {
+    display: flex; align-items: center; gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+  .section-header:first-child { margin-top: 0; }
+  .section-header__bar {
+    width: 4px; height: 20px;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+  .section-header__title {
+    font-size: 18px; font-weight: 700; color: var(--color-text-primary);
+  }
+  .section-header__count {
+    font-size: 12px; color: var(--color-text-secondary);
+    background: var(--color-surface-alt);
+    padding: 2px 10px; border-radius: 12px;
+  }
+
+  /* 页面卡片网格 */
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-md);
+  }
+  .page-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: block;
+  }
+  .page-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-floating);
+  }
+  .page-card__preview {
+    height: 180px;
+    background: var(--color-surface-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-card__preview-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+  }
+  .page-card__icon {
+    width: 48px; height: 48px;
+    z-index: 1;
+    opacity: 0.6;
+  }
+  .page-card__number {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: var(--color-primary);
+    color: #FFF;
+    font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px;
+    font-family: var(--font-number);
+    z-index: 1;
+  }
+  .page-card__body {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .page-card__title {
+    font-size: 14px; font-weight: 700; color: var(--color-text-primary);
+    margin-bottom: 2px;
+  }
+  .page-card__desc {
+    font-size: 11px; color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  /* 不同分组背景色 */
+  .preview-splash { background: linear-gradient(135deg, #E8A317, #3D2817); }
+  .preview-shop { background: linear-gradient(135deg, #FFF0D6, #FAF3EB); }
+  .preview-order { background: linear-gradient(135deg, #E0F7F4, #FFF8F0); }
+  .preview-profile { background: linear-gradient(135deg, #2C1810, #3D2817); }
+
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: var(--space-xl);
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    line-height: 1.8;
+  }
+  .footer__compliance {
+    font-size: 11px;
+    color: var(--color-danger);
+    margin-bottom: var(--space-sm);
+  }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- Hero 区 -->
+  <div class="hero">
+    <svg class="hero__logo" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="24" cy="13" rx="7" ry="4" fill="#FFF8F0" opacity="0.95"/>
+      <ellipse cx="34" cy="11" rx="8" ry="5" fill="#FFF8F0" opacity="0.95"/>
+      <ellipse cx="42" cy="14" rx="6" ry="4" fill="#FFF8F0" opacity="0.95"/>
+      <path d="M18 18 L46 18 L43 50 Q43 53 40 53 L24 53 Q21 53 21 50 Z" fill="#F5A623"/>
+      <path d="M22 22 L25 22 L23 49 L22 49 Z" fill="#FFF8F0" opacity="0.2"/>
+      <path d="M19 24 L45 24 L43 48 Q43 51 40 51 L24 51 Q21 51 21 48 Z" fill="#E8A317" opacity="0.7"/>
+      <path d="M46 26 Q54 28 54 35 Q54 42 46 42" stroke="#F5A623" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="hero__brand">鲜啤到</div>
+    <div class="hero__slogan">好啤酒，新鲜到</div>
+    <div class="hero__tag">鲜啤外卖小程序 · 高保真原型 P0 核心流程</div>
+  </div>
+
+  <!-- 设计系统摘要 -->
+  <div class="design-summary">
+    <div class="summary-card">
+      <div class="summary-item">
+        <div class="summary-swatch" style="background:#F5A623;"></div>
+        <div>
+          <div class="summary-info__label">主色</div>
+          <div class="summary-info__value">#F5A623</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-swatch" style="background:#2C1810;"></div>
+        <div>
+          <div class="summary-info__label">辅色-深</div>
+          <div class="summary-info__value">#2C1810</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-swatch" style="background:#FFF8F0;border:1px solid #E8DDD0;"></div>
+        <div>
+          <div class="summary-info__label">背景</div>
+          <div class="summary-info__value">#FFF8F0</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-swatch" style="background:#4CAF50;"></div>
+        <div>
+          <div class="summary-info__label">新鲜绿</div>
+          <div class="summary-info__value">#4CAF50</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-swatch" style="background:#00BFA5;"></div>
+        <div>
+          <div class="summary-info__label">冷链色</div>
+          <div class="summary-info__value">#00BFA5</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-swatch" style="background:linear-gradient(135deg,#F5A623,#E8951A);"></div>
+        <div>
+          <div class="summary-info__label">设计系统</div>
+          <div class="summary-info__name">Starbucks 定制</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页面预览区 -->
+  <div class="content">
+    <!-- 启动流程 -->
+    <div class="section-header">
+      <div class="section-header__bar"></div>
+      <span class="section-header__title">启动流程</span>
+      <span class="section-header__count">2 页</span>
+    </div>
+    <div class="page-grid">
+      <a class="page-card" href="01-splash.html">
+        <div class="page-card__preview preview-splash">
+          <span class="page-card__number">01</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><path d="M16 14H32L30 38Q30 40 28 40H20Q18 40 18 38Z" fill="rgba(255,248,240,0.4)"/><circle cx="24" cy="10" r="3" fill="rgba(255,248,240,0.4)"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">启动页/品牌闪屏</div>
+          <div class="page-card__desc">Logo + Slogan 动效 · 1.5s 跳转</div>
+        </div>
+      </a>
+      <a class="page-card" href="02-location.html">
+        <div class="page-card__preview preview-shop">
+          <span class="page-card__number">02</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 14 10 14 16C14 24 24 38 24 38C24 38 34 24 34 16C34 10 30 6 24 6Z" stroke="#F5A623" stroke-width="2"/><circle cx="24" cy="16" r="4" fill="#F5A623"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">定位授权/地址选择</div>
+          <div class="page-card__desc">首次引导授权 · 搜索/选择配送地址</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 商品浏览 -->
+    <div class="section-header">
+      <div class="section-header__bar"></div>
+      <span class="section-header__title">商品浏览</span>
+      <span class="section-header__count">5 页</span>
+    </div>
+    <div class="page-grid">
+      <a class="page-card" href="03-home.html">
+        <div class="page-card__preview preview-shop">
+          <span class="page-card__number">03</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="10" width="12" height="28" rx="2" stroke="#F5A623" stroke-width="2"/><rect x="20" y="10" width="22" height="8" rx="2" fill="rgba(245,166,35,0.2)"/><rect x="20" y="20" width="22" height="8" rx="2" fill="rgba(245,166,35,0.1)"/><rect x="20" y="30" width="22" height="8" rx="2" fill="rgba(245,166,35,0.15)"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">首页/商品列表</div>
+          <div class="page-card__desc">双栏布局 · 左分类88px + 右商品列表 · 底部5Tab</div>
+        </div>
+      </a>
+      <a class="page-card" href="04-search.html">
+        <div class="page-card__preview preview-shop">
+          <span class="page-card__number">04</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><circle cx="20" cy="20" r="12" stroke="#F5A623" stroke-width="2"/><path d="M30 30L40 40" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">搜索页</div>
+          <div class="page-card__desc">热搜榜 + 历史 + 联想词</div>
+        </div>
+      </a>
+      <a class="page-card" href="05-search-result.html">
+        <div class="page-card__preview preview-shop">
+          <span class="page-card__number">05</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="10" rx="2" stroke="#F5A623" stroke-width="2"/><rect x="8" y="22" width="32" height="10" rx="2" stroke="#F5A623" stroke-width="2" opacity="0.5"/><rect x="8" y="36" width="32" height="6" rx="2" stroke="#F5A623" stroke-width="2" opacity="0.3"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">搜索结果页</div>
+          <div class="page-card__desc">商品列表 + 筛选排序</div>
+        </div>
+      </a>
+      <a class="page-card" href="06-product-detail.html">
+        <div class="page-card__preview preview-shop">
+          <span class="page-card__number">06</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="4" stroke="#F5A623" stroke-width="2"/><circle cx="20" cy="20" r="4" fill="#F5A623" opacity="0.3"/><path d="M8 32L18 22L28 32L40 20" stroke="#F5A623" stroke-width="2" stroke-linejoin="round" opacity="0.5"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">商品详情页</div>
+          <div class="page-card__desc">大图轮播 + 规格 + 参数 + 评价 + 推荐</div>
+        </div>
+      </a>
+      <a class="page-card" href="07-sku-modal.html">
+        <div class="page-card__preview preview-shop">
+          <span class="page-card__number">07</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="6" y="20" width="36" height="24" rx="4" fill="rgba(245,166,35,0.2)" stroke="#F5A623" stroke-width="2"/><circle cx="16" cy="32" r="3" stroke="#F5A623" stroke-width="1.5"/><circle cx="32" cy="32" r="3" stroke="#F5A623" stroke-width="1.5"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">规格选择弹层</div>
+          <div class="page-card__desc">容量/包装/温度 · 数量选择 · 加购</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 下单流程 -->
+    <div class="section-header">
+      <div class="section-header__bar"></div>
+      <span class="section-header__title">下单流程</span>
+      <span class="section-header__count">4 页</span>
+    </div>
+    <div class="page-grid">
+      <a class="page-card" href="08-cart.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">08</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><path d="M8 10H14L18 34H38L42 16H18" stroke="#F5A623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="40" r="3" fill="#F5A623"/><circle cx="36" cy="40" r="3" fill="#F5A623"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">购物车页</div>
+          <div class="page-card__desc">数量增减 + 优惠券预览 + 凑单推荐</div>
+        </div>
+      </a>
+      <a class="page-card" href="09-confirm-order.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">09</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="30" rx="3" stroke="#F5A623" stroke-width="2"/><line x1="14" y1="18" x2="34" y2="18" stroke="#F5A623" stroke-width="1.5"/><line x1="14" y1="24" x2="34" y2="24" stroke="#F5A623" stroke-width="1.5" opacity="0.5"/><line x1="14" y1="30" x2="26" y2="30" stroke="#F5A623" stroke-width="1.5" opacity="0.5"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">确认订单页</div>
+          <div class="page-card__desc">地址 + 配送方式 + 明细 + 优惠券 + 支付</div>
+        </div>
+      </a>
+      <a class="page-card" href="10-payment.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">10</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="32" height="22" rx="3" stroke="#F5A623" stroke-width="2"/><circle cx="24" cy="25" r="4" fill="#F5A623" opacity="0.3"/><line x1="14" y1="36" x2="34" y2="36" stroke="#F5A623" stroke-width="2"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">支付收银台</div>
+          <div class="page-card__desc">储值卡 + 微信支付 + 优惠券 + 倒计时</div>
+        </div>
+      </a>
+      <a class="page-card" href="11-payment-result.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">11</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="rgba(76,175,80,0.2)" stroke="#4CAF50" stroke-width="2"/><path d="M16 24L22 30L32 18" stroke="#4CAF50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">支付结果页</div>
+          <div class="page-card__desc">成功状态 + 订单入口 + 配送进度</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 订单管理 -->
+    <div class="section-header">
+      <div class="section-header__bar"></div>
+      <span class="section-header__title">订单管理</span>
+      <span class="section-header__count">3 页</span>
+    </div>
+    <div class="page-grid">
+      <a class="page-card" href="12-order-list.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">12</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="10" y="8" width="28" height="34" rx="3" stroke="#F5A623" stroke-width="2"/><line x1="16" y1="16" x2="32" y2="16" stroke="#F5A623" stroke-width="1.5"/><line x1="16" y1="22" x2="32" y2="22" stroke="#F5A623" stroke-width="1.5" opacity="0.5"/><line x1="16" y1="28" x2="24" y2="28" stroke="#F5A623" stroke-width="1.5" opacity="0.5"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">订单列表页</div>
+          <div class="page-card__desc">全部/待支付/配送中/已完成/已取消 Tab</div>
+        </div>
+      </a>
+      <a class="page-card" href="13-order-detail.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">13</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><circle cx="12" cy="12" r="4" fill="#F5A623" opacity="0.4"/><circle cx="12" cy="24" r="4" fill="#F5A623" opacity="0.4"/><circle cx="12" cy="36" r="4" fill="#F5A623"/><line x1="12" y1="16" x2="12" y2="20" stroke="#F5A623" stroke-width="2"/><line x1="12" y1="28" x2="12" y2="32" stroke="#F5A623" stroke-width="2"/><rect x="22" y="8" width="18" height="32" rx="2" stroke="#F5A623" stroke-width="1.5" opacity="0.5"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">订单详情页</div>
+          <div class="page-card__desc">状态时间轴 + 骑手地图 + 明细 + 再来一单</div>
+        </div>
+      </a>
+      <a class="page-card" href="14-delivery-tracking.html">
+        <div class="page-card__preview preview-order">
+          <span class="page-card__number">14</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 14 10 14 16C14 24 24 38 24 38C24 38 34 24 34 16C34 10 30 6 24 6Z" fill="rgba(33,150,243,0.2)" stroke="#2196F3" stroke-width="2"/><circle cx="24" cy="16" r="4" fill="#2196F3"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">配送追踪页</div>
+          <div class="page-card__desc">全屏地图 + 骑手实时位置 + ETA + 冷链</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 用户中心 -->
+    <div class="section-header">
+      <div class="section-header__bar"></div>
+      <span class="section-header__title">用户中心</span>
+      <span class="section-header__count">3 页</span>
+    </div>
+    <div class="page-grid">
+      <a class="page-card" href="15-profile.html">
+        <div class="page-card__preview preview-profile">
+          <span class="page-card__number">15</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="#F5A623" stroke-width="2"/><path d="M8 42C8 33 15 27 24 27C33 27 40 33 40 42" stroke="#F5A623" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">用户中心页</div>
+          <div class="page-card__desc">头像/等级/储值余额/订单入口/功能列表</div>
+        </div>
+      </a>
+      <a class="page-card" href="16-address.html">
+        <div class="page-card__preview preview-profile">
+          <span class="page-card__number">16</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><path d="M24 6C18 6 14 10 14 16C14 24 24 38 24 38C24 38 34 24 34 16C34 10 30 6 24 6Z" stroke="#F5A623" stroke-width="2"/><circle cx="24" cy="16" r="4" fill="rgba(245,166,35,0.4)"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">地址管理页</div>
+          <div class="page-card__desc">地址列表 + 新增/编辑/删除 + 默认地址</div>
+        </div>
+      </a>
+      <a class="page-card" href="17-realname.html">
+        <div class="page-card__preview preview-profile">
+          <span class="page-card__number">17</span>
+          <svg class="page-card__icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="10" width="32" height="28" rx="3" stroke="#F5A623" stroke-width="2"/><circle cx="18" cy="20" r="4" stroke="#F5A623" stroke-width="1.5"/><line x1="26" y1="18" x2="36" y2="18" stroke="#F5A623" stroke-width="1.5"/><line x1="26" y1="24" x2="36" y2="24" stroke="#F5A623" stroke-width="1.5"/><line x1="12" y1="32" x2="24" y2="32" stroke="#F5A623" stroke-width="1.5"/></svg>
+        </div>
+        <div class="page-card__body">
+          <div class="page-card__title">实名认证页</div>
+          <div class="page-card__desc">身份证上传 + 人脸识别 + 合规警示</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <div class="footer__compliance">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+    <div>鲜啤到 · 鲜啤外卖小程序高保真原型 · P0 核心流程 17 页</div>
+    <div>设计系统：Starbucks 定制化 · 视觉学派：Soft Warm × Tech Utility</div>
+    <div style="margin-top:8px;">生成人：原型构建师 筑原型（Zhu） · 2026-07-21</div>
+  </div>
+</body>
+</html>

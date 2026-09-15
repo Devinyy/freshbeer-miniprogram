@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<!-- 鲜啤到 · 订单列表页 | 设计系统：Starbucks 定制 | 主色 #F5A623 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鲜啤到 · 订单</title>
+<style>
+  :root {
+    --color-primary: #F5A623;
+    --color-primary-light: #FFF0D6;
+    --color-secondary-dark: #2C1810;
+    --color-bg: #FFF8F0;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #FAF3EB;
+    --color-border: #E8DDD0;
+    --color-border-light: #F0E8DC;
+    --color-text-primary: #2C1810;
+    --color-text-secondary: #8B7D6B;
+    --color-text-tertiary: #B0A490;
+    --color-text-inverse: #FFFFFF;
+    --color-success: #4CAF50;
+    --color-danger: #F44336;
+    --color-warning: #FF9800;
+    --color-info: #2196F3;
+    --color-info-light: #E3F2FD;
+    --color-cold-chain: #00BFA5;
+    --color-cold-chain-bg: #E0F7F4;
+    --gradient-primary-btn: linear-gradient(135deg, #F5A623 0%, #E8951A 100%);
+    --shadow-card: 0 1px 4px rgba(44, 24, 16, 0.06);
+    --shadow-primary-glow: 0 2px 8px rgba(245, 166, 35, 0.3);
+    --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    --font-number: "DIN Alternate", "DIN", "Roboto Mono", "SF Mono", monospace;
+    --radius-tag: 4px;
+    --radius-image: 8px;
+    --radius-card: 12px;
+    --radius-pill: 24px;
+    --radius-circle: 999px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: var(--font-body);
+    width: 375px;
+    height: 812px;
+    margin: 0 auto;
+    background: var(--color-bg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 导航栏 + Tab */
+  .header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .nav-bar {
+    height: 44px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .nav-bar__title { font-size: 17px; font-weight: 600; color: var(--color-text-primary); }
+
+  .tab-bar {
+    display: flex;
+    height: 40px;
+  }
+  .tab-item {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    position: relative;
+  }
+  .tab-item--active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  .tab-item--active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 24px; height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+
+  /* 订单列表 */
+  .order-list {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: 70px;
+  }
+
+  /* 订单卡片 */
+  .order-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+  }
+  .order-card__header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .order-card__no {
+    font-size: 12px; color: var(--color-text-secondary);
+    font-family: var(--font-number);
+  }
+  .order-card__status {
+    font-size: 13px; font-weight: 700;
+  }
+  .order-card__status--pending { color: var(--color-warning); }
+  .order-card__status--delivering { color: var(--color-info); }
+  .order-card__status--completed { color: var(--color-success); }
+  .order-card__status--cancelled { color: var(--color-text-tertiary); }
+
+  .order-card__body {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .order-item-row {
+    display: flex; gap: var(--space-sm); align-items: center;
+    padding: 6px 0;
+  }
+  .order-item__image {
+    width: 48px; height: 48px; border-radius: var(--radius-image);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 9px; color: var(--color-text-secondary); font-weight: 600;
+  }
+  .order-item__info { flex: 1; min-width: 0; }
+  .order-item__name {
+    font-size: 13px; font-weight: 600; color: var(--color-text-primary);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .order-item__spec { font-size: 11px; color: var(--color-text-secondary); }
+  .order-item__qty { font-size: 12px; color: var(--color-text-secondary); font-family: var(--font-number); }
+
+  .order-card__footer {
+    padding: var(--space-sm) var(--space-md);
+    border-top: 1px solid var(--color-border-light);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .order-card__total {
+    font-size: 13px; color: var(--color-text-secondary);
+  }
+  .order-card__total strong {
+    font-family: var(--font-number);
+    font-size: 16px; font-weight: 700;
+    color: var(--color-text-primary);
+  }
+  .order-card__total strong::before { content: '¥'; font-size: 11px; }
+  .order-card__actions { display: flex; gap: 8px; }
+  .btn-small {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 16px;
+    cursor: pointer;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+  }
+  .btn-small--primary {
+    background: var(--gradient-primary-btn);
+    color: #FFF;
+    border: none;
+    box-shadow: var(--shadow-primary-glow);
+  }
+  .btn-small--outline {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  /* 配送中标签 */
+  .delivery-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--color-info-light);
+    color: var(--color-info);
+    font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: var(--radius-tag);
+    margin-top: 4px;
+  }
+
+  /* 合规警示 */
+  .compliance-warning {
+    text-align: center; font-size: 11px; color: var(--color-text-tertiary);
+    padding: var(--space-md); line-height: 1.6;
+  }
+
+  /* 底部 Tab */
+  .tabbar {
+    height: 56px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tabbar__item {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2px;
+    color: var(--color-text-secondary); position: relative;
+  }
+  .tabbar__item--active { color: var(--color-primary); }
+  .tabbar__item--cart .tabbar__icon-wrap {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--color-primary-light);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: -8px; border: 3px solid var(--color-surface);
+  }
+  .tabbar__badge {
+    position: absolute; top: 0; right: 50%; transform: translateX(16px);
+    min-width: 16px; height: 16px; border-radius: 50%;
+    background: var(--color-danger); color: #FFF;
+    font-size: 10px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4px;
+  }
+  .tabbar__label { font-size: 10px; font-weight: 500; }
+
+/* === 无障碍：动画降级 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="nav-bar"><span class="nav-bar__title">我的订单</span></div>
+    <div class="tab-bar">
+      <div class="tab-item">全部</div>
+      <div class="tab-item tab-item--active">待支付</div>
+      <div class="tab-item">配送中</div>
+      <div class="tab-item">已完成</div>
+      <div class="tab-item">已取消</div>
+    </div>
+  </div>
+
+  <div class="order-list">
+    <!-- 订单1 - 配送中 -->
+    <div class="order-card">
+      <div class="order-card__header">
+        <span class="order-card__no">订单号 XB20260721154...</span>
+        <span class="order-card__status order-card__status--delivering">配送中</span>
+      </div>
+      <div class="order-card__body">
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#E8A317;color:#FFF;">IPA</div>
+          <div class="order-item__info">
+            <div class="order-item__name">鹅岛 IPA 精酿啤酒</div>
+            <div class="order-item__spec">330ml · 玻璃瓶</div>
+          </div>
+          <span class="order-item__qty">×2</span>
+        </div>
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#F0E0C0;color:#6B4423;">福佳白</div>
+          <div class="order-item__info">
+            <div class="order-item__name">福佳白啤酒</div>
+            <div class="order-item__spec">330ml · 玻璃瓶</div>
+          </div>
+          <span class="order-item__qty">×2</span>
+        </div>
+        <span class="delivery-tag">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1V9M1 5H9" stroke="#2196F3" stroke-width="1" stroke-linecap="round"/></svg>
+          骑手距您 800m · 预计8分钟送达
+        </span>
+      </div>
+      <div class="order-card__footer">
+        <span class="order-card__total">共5件 合计 <strong>142.40</strong></span>
+        <div class="order-card__actions">
+          <button class="btn-small btn-small--outline">联系骑手</button>
+          <button class="btn-small btn-small--primary">查看配送</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 订单2 - 待支付 -->
+    <div class="order-card">
+      <div class="order-card__header">
+        <span class="order-card__no">订单号 XB20260720143...</span>
+        <span class="order-card__status order-card__status--pending">待支付</span>
+      </div>
+      <div class="order-card__body">
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#3D2817;color:#F5A623;">朋克IPA</div>
+          <div class="order-item__info">
+            <div class="order-item__name">酿酒狗朋克 IPA</div>
+            <div class="order-item__spec">330ml × 6瓶</div>
+          </div>
+          <span class="order-item__qty">×1</span>
+        </div>
+      </div>
+      <div class="order-card__footer">
+        <span class="order-card__total">合计 <strong>179.40</strong> <span style="color:var(--color-danger);font-size:11px;margin-left:4px;">14:58后取消</span></span>
+        <div class="order-card__actions">
+          <button class="btn-small">取消订单</button>
+          <button class="btn-small btn-small--primary">去支付</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 订单3 - 已完成 -->
+    <div class="order-card">
+      <div class="order-card__header">
+        <span class="order-card__no">订单号 XB20260719120...</span>
+        <span class="order-card__status order-card__status--completed">已完成</span>
+      </div>
+      <div class="order-card__body">
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#D4A843;color:#FFF;">青岛白啤</div>
+          <div class="order-item__info">
+            <div class="order-item__name">青岛白啤 + 酒鬼花生米</div>
+            <div class="order-item__spec">500ml × 3 + 100g × 2</div>
+          </div>
+          <span class="order-item__qty">×5</span>
+        </div>
+      </div>
+      <div class="order-card__footer">
+        <span class="order-card__total">合计 <strong>48.50</strong></span>
+        <div class="order-card__actions">
+          <button class="btn-small">评价</button>
+          <button class="btn-small btn-small--outline">再来一单</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 订单4 - 已取消 -->
+    <div class="order-card">
+      <div class="order-card__header">
+        <span class="order-card__no">订单号 XB20260718098...</span>
+        <span class="order-card__status order-card__status--cancelled">已取消</span>
+      </div>
+      <div class="order-card__body">
+        <div class="order-item-row">
+          <div class="order-item__image" style="background:#6B4423;color:#FFF;">罗斯福</div>
+          <div class="order-item__info">
+            <div class="order-item__name">罗斯福10号</div>
+            <div class="order-item__spec">330ml × 4瓶</div>
+          </div>
+          <span class="order-item__qty">×4</span>
+        </div>
+      </div>
+      <div class="order-card__footer">
+        <span class="order-card__total" style="text-decoration:line-through;color:var(--color-text-tertiary);">合计 <strong style="color:var(--color-text-tertiary);">128.00</strong></span>
+        <div class="order-card__actions">
+          <button class="btn-small btn-small--outline">再来一单</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 合规警示 -->
+    <div class="compliance-warning">未成年人禁止购买酒精饮品 · 适量饮酒，禁止酒驾</div>
+  </div>
+
+  <!-- 底部 Tab -->
+  <div class="tabbar">
+    <div class="tabbar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 12L12 3L21 12V20C21 20.55 20.55 21 20 21H15V14H9V21H4C3.45 21 3 20.55 3 20V12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <span class="tabbar__label">首页</span>
+    </div>
+    <div class="tabbar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="4" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="4" y="13" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="13" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span class="tabbar__label">分类</span>
+    </div>
+    <div class="tabbar__item tabbar__item--cart">
+      <div class="tabbar__icon-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 4H5L7 16H19L21 8H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.5" fill="currentColor"/><circle cx="17" cy="20" r="1.5" fill="currentColor"/></svg>
+      </div>
+      <div class="tabbar__badge">3</div>
+      <span class="tabbar__label">购物车</span>
+    </div>
+    <div class="tabbar__item tabbar__item--active">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" fill="currentColor"/><line x1="8" y1="8" x2="16" y2="8" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="12" x2="16" y2="12" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="16" x2="12" y2="16" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="tabbar__label">订单</span>
+    </div>
+    <div class="tabbar__item">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 21C4 16.58 7.58 13 12 13C16.42 13 20 16.58 20 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span class="tabbar__label">我的</span>
+    </div>
+  </div>
+</body>
+</html>
