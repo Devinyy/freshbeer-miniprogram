@@ -162,8 +162,10 @@ page {
   --radius-image: 16rpx;
   --radius-button: 16rpx;
   --radius-card: 24rpx;
+  --radius-sheet: 32rpx;
   --radius-pill: 48rpx;
   --space-sm: 24rpx;
+  --space-md: 32rpx;
   --space-card-padding: 24rpx;
   --text-caption: 24rpx;
   --text-micro: 20rpx;

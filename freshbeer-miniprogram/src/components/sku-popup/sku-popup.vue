@@ -143,12 +143,14 @@ function onConfirm() {
   z-index: 1000;
   display: flex;
   align-items: flex-end;
+  box-sizing: border-box;
 }
 .sheet {
   width: 100%;
   max-height: 75vh;
   background: var(--color-surface);
-  border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  border-radius: 32rpx 32rpx 0 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding-bottom: calc(env(safe-area-inset-bottom));

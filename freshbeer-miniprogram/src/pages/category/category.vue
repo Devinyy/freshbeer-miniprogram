@@ -1,16 +1,6 @@
 <template>
   <view class="page">
-    <view class="nav">
-      <view class="nav__bar nav__bar--title" :style="{ paddingTop: statusBarH + 'px', paddingRight: capsuleRight + 'px' }">
-        <text class="nav__title">全部分类</text>
-      </view>
-      <view class="nav__bar nav__bar--search">
-        <view class="nav__search" @tap="goSearch">
-          <fb-icon name="search" :size="17" color="#8B7D6B" />
-          <text class="nav__search-ph">搜索精酿 / 品牌</text>
-        </view>
-      </view>
-    </view>
+    <fb-top-search-header title="全部分类" @search="goSearch" />
 
     <view class="body">
       <fb-category-nav
@@ -66,10 +56,6 @@ const activeCategory = ref('')
 const skuShow = ref(false)
 const skuProduct = ref(null)
 const cart = useCartStore()
-const systemInfo = uni.getWindowInfo ? uni.getWindowInfo() : uni.getSystemInfoSync()
-const statusBarH = ref(systemInfo.statusBarHeight || 0)
-const menuButton = uni.getMenuButtonBoundingClientRect ? uni.getMenuButtonBoundingClientRect() : null
-const capsuleRight = menuButton ? Math.max(12, systemInfo.windowWidth - menuButton.left + 8) : 96
 
 onMounted(async () => {
   const res = await getProducts()
